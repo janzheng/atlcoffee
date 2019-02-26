@@ -1,0 +1,13 @@
+# dependencies
+/atlcoffee/node_modules
+
+# logs
+/atlcoffee/npm-debug.log
+
+# Nuxt build
+/atlcoffee/.nuxt
+
+# Nuxt generate
+/atlcoffee/dist
+
+notes.md

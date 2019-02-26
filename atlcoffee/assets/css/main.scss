@@ -1,0 +1,156 @@
+
+
+@import 'settings.scss';
+@import 'design.scss';
+
+
+
+
+
+
+
+.Header-title {
+  &, * {
+    // padding-bottom: $size-2;
+    font-size: 1.4em;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+}
+
+// .subtitle {
+//   &, p {
+//     font-size: $size-1;
+//     line-height: $size-2;
+//     @extend %font-serif;
+//   }
+// }
+
+
+@import 'layout'; // typography, basic design & whitespace
+@import 'components';
+@import 'sections';
+
+
+
+
+
+// $testcolors: (
+//   red: #BD5843,
+//   blue: #8BADC2,
+// );
+// $colorMap: colorTintMap($testcolors);
+
+.TestOne {
+  color: black; font-weight: bold;
+  background: map-get($colorMap, phdir-500);
+  padding: 64px;
+}
+
+.Test {
+  color: white; font-weight: bold;
+  background: map-get($colorMap, phdir-300);
+  padding: 64px;
+}
+.TestTwo {
+  color: white; font-weight: bold;
+  background: map-get($colorMap, pink-500);
+  padding: 64px;
+}
+
+
+
+
+/* 
+
+  CSS graveyard
+
+ */
+ 
+/*  VOM JOIN FORM */
+
+// .Join-options {
+
+  // &.--one {
+  //   @extend ._width-content-magic;
+  //   margin: 0 auto;
+  // }
+  // &.--two {
+  //   @extend ._grid-2;
+  // }
+  // &.--three {
+  //   @extend ._grid-3;
+  // }
+// }
+
+
+// ._md--margin-none {
+//   p {
+//     margin: 0;
+//   }
+// }
+
+
+/* 
+
+  Experiments
+
+ */
+
+._table-em-first {
+  // emphasize the first column as header
+  td:first-child {
+    @extend ._font-bold;
+  } 
+}
+
+
+._flex-wrap-xs {
+  @include screen-xs {
+    flex-wrap: wrap;
+  }
+}
+
+._width-full-xs {
+  @include screen-xs {
+    width: 100%;
+  }
+}
+
+
+
+._wordbreak {
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+
+._wordbreak-link { 
+  // main difference is this does NOT create hypthens, in case someone copy/pastes
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+}
+
