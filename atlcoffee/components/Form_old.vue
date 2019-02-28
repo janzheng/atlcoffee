@@ -10,24 +10,24 @@
    -->
 
   <div class="Form"> 
-    <div v-if="payload.intro" class="Form-intro " v-html="$md.render(payload.intro || '')" />
+    <div v-if="intro" class="Form-intro " v-html="$md.render(intro)" />
     <div class="Form-body">
       <div v-if="!success && !error">
-        <Formlet ref="form" :inputs="getForm(payload.JSON)" @handler="formHandler" />
+        <Formlet ref="form" :inputs="getForm(source)" @handler="formHandler" />
         <div class=" _grid-3-2 _align-vertically" >
           <div>
-            <span class="Form-privacy _md-p_fix" v-html="$md.render(payload.privacy || '')" />
+            <span class="Form-privacy _md-p_fix" v-html="$md.render(privacy)" />
           </div>
-          <button v-if="!sending" class="Form-btn _button _margin-none _center _padding-left _padding-right" @click="submit" >{{ payload.cta }}</button>
+          <button v-if="!sending" class="Form-btn _button _margin-none _center _padding-left _padding-right" @click="submit" >{{ cta }}</button>
           <button v-if="sending" class="Form-btn _button --outline _margin-none _center" >Sending...</button>
         </div>
       </div>
 
-      <div v-if="success" class="" v-html="$md.render(payload.thanks || '')">
+      <div v-if="success" class="" v-html="$md.render(thanks)">
         <h4>Thank you for sending us feedback!</h4>
       </div>
 
-      <div v-if="error" class="" v-html="$md.render(payload.error || '')">
+      <div v-if="error" class="" v-html="$md.render(errorMsg)">
         Something went wrong, please try again
       </div>
     </div>
@@ -50,17 +50,28 @@ export default {
   // set :json='true' to dump the payload into a table named JSON, to prevent throwing errors
   // alert: sends us an email alert (this is through the server)
   props: {
-    'payload': Object,
-    'sendEmail': Boolean, // if true, pings the handler to send an email (NOT IMPLEMENTED)
-    'validate': Boolean, // if true, run through vuelidate, otherwise skip (NOT IMPLEMENTED)
-    'target': String, // name of the target table
-    'source': String, // optional; what's the source of this form input (for debugging, mostly)
+    'intro': String,
+    'source': String,
+    'privacy': String,
+    'cta': String,
+    'thanks': String,
+    'errorMsg': String,
+    'payload': String,
+    'table': String,
+    'postUrl': String,
+    'isAlert': Boolean,
+    'isJson': Boolean,
+    'notes': String,
   },
 
   data: function () {
     return {
       sending: false,
+      // postUrl: '', // https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input
       isFormValid: false,
+      Name: '',
+      Email: '',
+      Feedback: '',
       success: false,
       error: false
     }
@@ -90,18 +101,22 @@ export default {
 
       if(this.isFormValid && !this.sending) {
         const data = {
-          type: 'cytosis',
-          target: this.target,
-          sendEmail: this.sendEmail,
-          source: this.source,
-          form: this.form.$model,
-          payload: this.payload,
+          type: 'form',
+          table: this.table,
+          json: this.isJson,
+          alert: this.isAlert,
+          notes: this.notes,
+          data: {
+            ... this.form.$model,
+            ... this.payload,
+            Source: this.source
+          }
         }
 
         this.sending = true
 
         console.log('Submitting data: ', data)
-        axios.post(this.payload.handler, data)
+        axios.post(this.postUrl, data)
         .then(function (response) {
           console.log('Message sent! Status:', response.status)
           // if(status.status == 200) {

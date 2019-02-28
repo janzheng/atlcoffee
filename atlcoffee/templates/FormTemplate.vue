@@ -1,18 +1,11 @@
 <template>
   <div class="FormContact FormCard">
 
-    <Form :intro="intro"
-          :source="source"
-          :cta="cta"
-          :thanks="thanks"
-
-          :privacy="privacy"
-          :errorMsg="error"
-          :postUrl="postUrl"
-          :isAlert="true"
-          
+    <Form :payload="payload"
+          :target="src.fields['Select']"
+          :sendEmail="true"
           class=""
-          table="Dynamic"
+          source="Contact page / contact form"
     />
   </div>
 </template>
@@ -28,21 +21,13 @@ export default {
     Form,
   },
 
-  props: ['src'],
+  props: {
+    src: Object
+  },
 
   data: function () {
-    
     return {
-      postUrl: this.src.fields['String'] || this.$store.state.ext_handler,
 
-      intro: this.src.fields['Markdown'],
-      source: this.src.fields['JSON'],
-      isPublished: this.src.fields['isPublished'],
-  
-      error: this.$cytosis.find('Content.form-error', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
-      thanks: this.$cytosis.find('Content.form-thanks', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
-      cta: this.$cytosis.find('Content.form-cta', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
-      privacy: this.$cytosis.find('Content.form-privacy', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 
@@ -51,6 +36,20 @@ export default {
       'Content',
       ]),
 
+    payload() {
+      console.log('payload src:', this.src)
+      return {
+        intro: this.src.fields['Markdown'],
+        JSON: this.src.fields['JSON'],
+        isPublished: this.src.fields['isPublished'],
+    
+        handler: this.src.fields['String'] || this.$store.state.ext_handler,
+        error: this.$cytosis.findOne('form-error', this.$store.state['Content'] ).fields['Markdown'],
+        thanks: this.$cytosis.findOne('form-thanks', this.$store.state['Content'] ).fields['Markdown'],
+        cta: this.$cytosis.findOne('form-cta', this.$store.state['Content'] ).fields['Markdown'],
+        privacy: this.$cytosis.findOne('form-privacy', this.$store.state['Content'] ).fields['Markdown'],
+      }
+    }
   },
 
 

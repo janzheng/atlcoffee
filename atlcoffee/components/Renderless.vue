@@ -9,7 +9,11 @@
 <script>
 
 export default {
-  props: ['value'],
+
+  props: {
+    'value': Array,
+  },
+
   data() {
     return {
       newTag: '',

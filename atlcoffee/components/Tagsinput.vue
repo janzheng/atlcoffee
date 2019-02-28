@@ -7,18 +7,16 @@
  -->
 <template>
   <div class="tags-input">
-    <span v-for="tag in value" class="tags-input-tag _tag">
+    <span v-for="tag in value" :key="tag" class="tags-input-tag _tag">
       <span>{{ tag }}</span>
       <span class="tags-input-remove _pointer" @click="removeTag(tag)">&times;</span>
     </span>
-    <input class="tags-input-text" placeholder="Add tag..."
-      @keydown.enter.prevent="addTag"
-      v-model="newTag"
+    <input v-model="newTag" class="tags-input-text" placeholder="Add tag..."
+           @keydown.enter.prevent="addTag"
     >
     <!-- childData and sayHello are passed to the calling component -->
-    <slot name="tester" :childData="childData" :sayHello="sayHello" :events="{
-      click: () => sayHello()
-    }"></slot>
+    <slot :childData="childData" :sayHello="sayHello" :events="{ click: () => sayHello() }" 
+          name="tester" />
   </div>
 </template>
 
@@ -26,7 +24,9 @@
 <script>
 
 export default {
-  props: ['value'],
+  props: {
+    value: Array,
+  },
   data() {
     return {
       newTag: '',

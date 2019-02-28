@@ -5,16 +5,14 @@
       <div class="_section-article" v-html="$md.render(content || '')" />
 
       <div class="Cafe-filters _section-article" >
-        <!-- <input id="Cafe-search" ref="cafeSearch" v-model.trim="searchString" class="Cafe-search _form-input " type="text" name="Cafe-search" placeholder="Search" > -->
         <input id="Cafe-search" ref="cafeSearch" v-model.trim="searchString" class="Cafe-search _form-input " type="text" name="Cafe-search" placeholder="Search" @input="doSearch">
       </div>
     </div>
 
-      <div class="_section-article _padding-bottom-2">
-        <div class="Cafe-card" v-for="cafe of Cafes" :key="cafe.id">
-          <router-link :to="'/cafe/'+cafe.fields['Slug']" v-if="cafe.fields['Slug']">{{ cafe.fields['Name'] }}</router-link>
-          <div v-else>{{ cafe.fields['Name'] }}</div>
-        </div>
+    <div class="_section-article _padding-bottom-2">
+      <div v-for="cafe of Cafes" :key="cafe.id" class="Cafe-card" >
+        <router-link v-if="cafe.fields['Slug']" :to="'/cafe/'+cafe.fields['Slug']" >{{ cafe.fields['Name'] }}</router-link>
+        <div v-else>{{ cafe.fields['Name'] }}</div>
       </div>
     </div>
 
@@ -26,7 +24,7 @@
 
 <script>
 
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 import Cytosis from '~/other/cytosis'
 import _ from 'lodash'
 

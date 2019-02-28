@@ -6,87 +6,7 @@
     </div>
 
     <div class="_section-content">
-      <!-- <div class="_section-article" v-html="map" /> -->
       <div class="_card _padding " v-html="$md.render(map || '')" />
-    </div>
-
-    <!-- 
-    <div class="TestOne">
-      This is yet a test. LIGHT
-    </div>
-    <div class="Test">
-      This is yet a test
-    </div>
-    <div class="TestTwo">
-      This also is yet a test
-    </div>
-     -->
-
- 
-    <!-- <div class="">
-          <div class="_section-content">
-            <div class="_section-article">
-              <CapsidBanner />
-            </div>
-          </div>
-          <div class="_grid-3-1">
-            <div>
-              <FormCapsidFeedback class=""/>
-            </div>
-
-            <div class="">
-              <no-ssr>
-                <Twitter />
-              </no-ssr>
-            </div>
-          </div>
-        </div>
-    -->
-
-
-
-    <div class="">
-      <!-- <div class="_grid-3-1"> -->
-        <!-- 
-        <div class="StreamCard _grid-1-6">
-          <div class="StreamCard-sidebar">
-            <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" />
-          </div>
-          <div class="StreamCard-main _margin-bottom">
-            <CapsidStub :issues="latest" :is-featured="true" class="_section-article _margin-center" />
-            <CapsidMicroBanner class="CapsidBanner" />
-            <FormCapsidFeedback class=""/>
-          </div>
-        </div>
-         -->
-        <!-- <div class="Stream">
-
-          <StreamCard>
-            <div slot="sidebar" style="width:100px">
-              <img class="cnt _block _left _margin-center" src="/phagefutures.png" width="80px" alt="Phage Futures" >
-            </div>
-            <div slot="main" class="_card --border-active _padding _md-p_fix" v-html="$md.render(phagefutures || '')" />
-          </StreamCard>
-
-          <StreamCard>
-            <div slot="sidebar" style="width:100px">
-              <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" >
-            </div>
-            <div slot="main">
-              <CapsidStub :issues="latestCapsid" :is-featured="true" class="_section-article _margin-center" />
-              <CapsidMicroBanner class="CapsidBanner" />
-              <FormCapsidFeedback class=""/>
-            </div>
-          </StreamCard>
-        </div>
-
-        <div class="">
-          <no-ssr>
-            <Twitter />
-          </no-ssr>
-        </div>
- -->
-      <!-- </div> -->
     </div>
 
   </div>
@@ -97,28 +17,12 @@
 
 <script>
 
-import Twitter from '~/components/Twitter.vue'
-// import FormVomFeedback from '~/forms/FormVomFeedback.vue'
-// import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
-// import SignupCapsid from '~/components/SignupCapsid.vue'
-// import CapsidBanner from '~/components/CapsidBanner.vue'
-// import CapsidMicroBanner from '~/components/CapsidMicroBanner.vue'
-// import CapsidStub from '~/components/CapsidStub.vue'
-import StreamCard from '~/components/StreamCard.vue'
+// import StreamCard from '~/components/StreamCard.vue'
 
 import { mapState } from 'vuex'
-// import Cytosis from 'cytosis'
-// import Cytosis from '~/other/cytosis'
 export default {
 
   components: {
-    Twitter,
-    // FormCapsidFeedback,
-    // SignupCapsid,
-    // CapsidStub,
-    // CapsidMicroBanner,
-    // CapsidBanner,
-    // StreamCard
   },
 
   layout: 'contentframe',

@@ -27,7 +27,7 @@
 
 <script>
 
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 import FormTemplate from '~/templates/FormTemplate.vue'
 
 export default {

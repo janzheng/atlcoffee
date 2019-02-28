@@ -2,8 +2,8 @@
 <template>
   <!-- <header class="Header _section-page _padding-top _padding-bottom _margin-center"> -->
   <header class="Header _padding-top _padding-bottom _margin-center">
-    <router-link to="/" class="Header-title" v-html="$md.render(title || '')"></router-link>
-    <router-link v-for="nav of navs" :to="'/'+$slugify(nav, {lower: true})" class="_margin-right">{{ nav }}</router-link>
+    <router-link to="/" class="Header-title" v-html="$md.render(title || '')" />
+    <router-link v-for="nav of navs" :to="'/'+$slugify(nav, {lower: true})" :key="nav" class="_margin-right">{{ nav }}</router-link>
   </header>
 </template>
 

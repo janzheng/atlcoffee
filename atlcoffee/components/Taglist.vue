@@ -7,34 +7,33 @@
  -->
 
 <template>
-	<div>
-
+  <div>
     <Renderless :value="value" @input="(tags) => { $emit('input', tags) }">
       <div slot-scope="{ tag, removeTag, inputAttrs, inputEvents, addTags }" class="tags-input">
         <span class="tags-input-tag">
-          <span class="_tag _margin-right-half" v-for="tag in value">
+          <span v-for="tag in value" :key="tag" class="_tag _margin-right-half" >
             {{ tag }}
             <span class="tags-input-remove" @click="removeTag(tag)">&times;</span>
           </span>
         </span>
-        <input class="tags-input-text" placeholder="Add tag..."
-          v-bind="inputAttrs"
-          v-on="inputEvents"
+        <input v-bind="inputAttrs"
+               class="tags-input-text" 
+               placeholder="Add tag..."
+               v-on="inputEvents"
         >
       </div>
     </Renderless>
 
-<!-- 
-    <Renderless v-model="tags">
-      <div slot-scope="{ inputEvents, inputAttrs, addTag }" class="tags-input">
-        <input class="tags-input-text" placeholder="Type a tag" v-on="inputEvents" v-bind="inputAttrs"
-        >
-        <div @click="addTag">Add it</div>
-      </div>
-    </Renderless>
- -->
-
-	</div>
+    <!-- 
+      <Renderless v-model="tags">
+        <div slot-scope="{ inputEvents, inputAttrs, addTag }" class="tags-input">
+          <input class="tags-input-text" placeholder="Type a tag" v-on="inputEvents" v-bind="inputAttrs"
+          >
+          <div @click="addTag">Add it</div>
+        </div>
+      </Renderless>
+    -->
+  </div>
 </template>
 
 <script>
@@ -47,7 +46,9 @@ export default {
     Renderless,
   },
 
-  props: ['value']
+  props: {
+    value: Array,
+  }
   
 }
 </script>

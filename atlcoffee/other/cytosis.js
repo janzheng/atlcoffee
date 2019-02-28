@@ -221,7 +221,7 @@ class Cytosis {
       _this.airBase.tableQuery = Cytosis.tableQuery || 'tables';
       _this.airBase.options = Cytosis.options || {view: "Grid view"};
     } else {
-      _this.airKey = opts.airKey || opts.airKey;
+      _this.airKey = opts.airKey;
       _this.airBase = { id: opts.airBase || opts.airBaseId };
       _this.airBase.tables = opts.tables || []
       _this.airBase.tableQuery = opts.tableQuery || 'tables';

@@ -5,7 +5,7 @@ import slugify from 'slugify'
 Vue.filter('slugify', function(value) {
   if (value) {
     return slugify(value, {
-    	lower: true,
+      lower: true,
     })
   }
 })

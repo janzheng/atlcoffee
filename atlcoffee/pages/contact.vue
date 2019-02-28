@@ -4,7 +4,7 @@
     <div class="_section-content">
       <div class="_section-article" v-html="$md.render(content || '')" />
       <div class="_section-article">
-        <FormContact />
+        <FormContact :src="form"/>
       </div>
     </div>
 
@@ -41,7 +41,7 @@ export default {
   data () {
     return {
       content: this.$cytosis.find('Content.contact-page', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
-      // form: this.$cytosis.find('Content.contact-page', {'Content': this.$store.state['Content']} )[0]['fields']['JSON'],
+      form: this.$cytosis.find('Content.form-contact', {'Content': this.$store.state['Content']} )[0],
       // images: this.$cytosis.find('Content.contact-page', {'Content': this.$store.state['Content']} )[0]['fields']['Attachments'],
     }
   },
