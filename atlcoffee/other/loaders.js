@@ -1,7 +1,7 @@
 
 
 // loads from a specific query / useful for selective content
-export async function loadQuery(env, store, routeName, query) {
+export async function loadQuery(env, store, routeName, query, keyword) {
   let data
   // todo: need some other way to keep track of what we've grabbed
   // esp. important for site generation
@@ -10,7 +10,10 @@ export async function loadQuery(env, store, routeName, query) {
   data = await store.cache.dispatch('loadCytosis', {
     env,
     tableQuery: query,
-    caller: routeName
+    caller: routeName,
+    settings: {
+      keyword: keyword
+    },
   })
   // }
   return data

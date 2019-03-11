@@ -50,17 +50,17 @@ const site_static = true; // if set to true, the client will never pull data
 let site_routes; // used for the generate process to save on airtable pulls
 
 // load cytosis data here, for easier generation
-const initData = async function() {
-  console.log('initData loading ...')
-  // use sparingly; this data makes it into all generated html files
-  let cytosis = await new Cytosis({
-    airKey: airtable_api, 
-    airBase: airtable_base, 
-    tableQuery: '_all', 
-  })
-  console.log('initData loaded!')
-  return cytosis
-}
+// const initData = async function() {
+//   console.log('initData loading ...')
+//   // use sparingly; this data makes it into all generated html files
+//   let cytosis = await new Cytosis({
+//     airKey: airtable_api, 
+//     airBase: airtable_base, 
+//     tableQuery: '_all', 
+//   })
+//   console.log('initData loaded!')
+//   return cytosis
+// }
 
 
 module.exports = (async function() {
@@ -194,10 +194,10 @@ module.exports = (async function() {
       // '~plugins/vue-highlightjs.js',
       // { src: '~/plugins/plugintest.js', ssr: false }
       { src: '~/plugins/policy.js', ssr: false },
-      { src: '~/plugins/hotjar.js', ssr: false }, // need to link this to policy
-      { src: '~/plugins/mixpanel.js', ssr: false },
+      // { src: '~/plugins/hotjar.js', ssr: false }, // need to link this to policy
+      // { src: '~/plugins/mixpanel.js', ssr: false },
       { src: '~/plugins/twitter.js', ssr: false },
-      { src: '~/plugins/paypal.js', ssr: false },
+      // { src: '~/plugins/paypal.js', ssr: false },
       { src: '~/plugins/markdownit.js' },
       { src: '~/plugins/cytosis.js' },
       { src: '~/plugins/date.js' },
@@ -329,16 +329,17 @@ module.exports = (async function() {
             component: resolve(__dirname, 'pages/coffeepage.vue')
           },
           {
+            // Dynamic Content Page Templates
             // generated using Content Templates group in airtable/content
             name: 'contemplatePage',
             path: '/:slug',
             component: resolve(__dirname, 'pages/contemplate.vue')
           },
-          // {
-          //   name: 'capsid',
-          //   path: '/capsid',
-          //   component: resolve(__dirname, 'pages/capsidlist.vue')
-          // },
+          {
+            name: 'stories',
+            path: '/stories/:slug',
+            component: resolve(__dirname, 'pages/story.vue')
+          },
           // {
           //   // opens each issue separately, good for deeplinking, possibly comments
           //   name: 'capsidIssue',

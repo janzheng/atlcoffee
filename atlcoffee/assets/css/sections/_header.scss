@@ -1,11 +1,18 @@
 
 .Header {
 
+  position: relative;
+  z-index: 1000;
   // give a lot more space to links
   max-width: $width-lg-min;
   padding-left: $size-2;
   padding-right: $size-2;
 
+  &.--fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 
   .Header-content {
     @include screen-sm {
@@ -16,7 +23,7 @@
   a {
     @include screen-sm {
       // font-size: usetheme(font-large), // $font-large;
-      font-size: usetheme(size), // $font-large;
+      font-size: usetheme(nav-size), // $font-large;
     }
     // font-size: $size-larger;
     text-decoration: none;

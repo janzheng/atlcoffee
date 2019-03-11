@@ -220,12 +220,14 @@ class Cytosis {
       _this.airBase.tables = Cytosis.tables || [];
       _this.airBase.tableQuery = Cytosis.tableQuery || 'tables';
       _this.airBase.options = Cytosis.options || {view: "Grid view"};
+      _this.airBase.settings = Cytosis.settings; // used for keyword or other payloads
     } else {
       _this.airKey = opts.airKey;
       _this.airBase = { id: opts.airBase || opts.airBaseId };
       _this.airBase.tables = opts.tables || []
       _this.airBase.tableQuery = opts.tableQuery || 'tables';
       _this.airBase.options = opts.options || {view: "Grid view"};
+      _this.airBase.settings = opts.settings; // used for keyword or other payloads
     }
 
     Airtable.configure({
@@ -244,7 +246,7 @@ class Cytosis {
         if(result) {
           // console.log('[Cytosis] _cytosis initiated:', result)
           // then retrieve the actual data
-          Cytosis.getTables({options: opts.options, cytosis: _this, tables: _this.airBase.tables}).then((_result) => {
+          Cytosis.getTables({options: opts.options, settings: opts.settings, cytosis: _this, tables: _this.airBase.tables}).then((_result) => {
             _this.tables = _result
             resolve(_this)
           })
@@ -328,6 +330,7 @@ class Cytosis {
                   pageSize: config.fields['pageSize'],
                   sort: config.fields['sort'] ? JSON.parse(config.fields['sort'])['sort'] : undefined, // needs to be of format : "{sort: [blahblah]}"
                   view: config.fields['view'],
+                  matchKeywordWithField: config.fields['matchKeywordWithField'],
                 }
 
                 // tables is an array of strings that say which tables (tabs) in Airtable to pull from
@@ -476,7 +479,7 @@ class Cytosis {
   //    }
   // getTables (options={}, tables=this.airBase.tables ) {
   // static getTables ({options, tables=this.airBase.tables}) {
-  static getTables ({options, cytosis, tables}) {
+  static getTables ({options, settings, cytosis, tables}) {
 
     options = options || cytosis.airBase.options || {}
     tables = tables || cytosis.airBase.tables
@@ -489,18 +492,27 @@ class Cytosis {
     if(!Cytosis.preCheck(cytosis.airKey,cytosis.airBase))
       return {}
 
-    function getTablePromise({tables, options}) {
+    function getTablePromise({tables, options, settings}) {
       try {
 
         let {view, fields, sort, filter, maxRecords, pageSize} = options
 
-        // console.log('getTables retrieving:', tables, options)
+        // console.log('getTables retrieving:', tables, options, ' settings...', settings)
 
         if (!view)
           view = ''
         if (!filter)
           filter = ''
         // console.log('Retrieving airtables')
+
+        // if matchKeywordWithField exists, and a keyword was passed into the cytosis options object,
+        // we create a filterByFormula where the given keyword has to exist in the field
+        // this is useful for matching articles by dynamic slug value, etc.
+        if(settings && settings.keyword && options && options.matchKeywordWithField) {
+          filter = `IF({${options.matchKeywordWithField}} = "${settings.keyword}",TRUE(),FALSE())`
+          // console.log('matchKeywordWithField filter: ', filter, ' for', settings.keyword, ' with', options.matchKeywordWithField)
+        }
+
         for (let table of tables) {
           let list = []
 
@@ -562,7 +574,8 @@ class Cytosis {
     if(typeof tables[0] == 'string') {
       getTablePromise({
         tables: tables,
-        options: options 
+        options: options,
+        settings: settings
       })
     } 
     // tables could also be an array of objects of { query: 'tablequery', options }
@@ -573,7 +586,8 @@ class Cytosis {
         // setTimeout(function(){
           getTablePromise({
             tables: query.tables, // array of strings 
-            options: query.options 
+            options: query.options, 
+            settings: settings
           })
         // }, 200);
       })

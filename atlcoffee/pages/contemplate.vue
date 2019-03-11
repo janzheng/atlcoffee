@@ -1,5 +1,6 @@
 <!-- 
 
+  (dynamic)
   Content Template (generate through Content/template group)
 
  -->
@@ -56,11 +57,16 @@ export default {
   
   computed: {
     content() {
-      return this.$cytosis.findOne(this.slug, this.$store.state['Content'] ).fields['Markdown']
+      const content = this.$cytosis.findOne(this.slug, this.$store.state['Content'] )
+
+      if (content.fields['isPublished'] && content.fields['Type'] == 'Content Page')
+        return content.fields['Markdown']
+      else
+        this.$nuxt.error({ statusCode: 404, message: "Dynamic content couldn't be found" })
     },
     linkedContent() {
       const src = this.$store.state['Content']
-      const linkedArray = this.$cytosis.findOne(this.slug, src ).fields['LinkedContent']
+      const linkedArray = this.$cytosis.findOne(this.slug, src).fields['LinkedContent']
       const linked = this.$cytosis.getLinkedRecords(linkedArray, src, true).reverse()
       // airtable returns the results in reverse
 

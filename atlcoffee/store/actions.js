@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 export default {
   // async loadCytosis ({ commit, state }, {env, tableQuery, options, caller}) {
-  async loadCytosis ({ commit }, {env, tableQuery, options, caller, _key, _base}) {
+  async loadCytosis ({ commit }, {env, tableQuery, options, settings, caller, _key, _base}) {
     const airKey = _key || env.airtable_api
     const airBase = _base || env.airtable_base
 
@@ -22,7 +22,8 @@ export default {
       airKey, 
       airBase, 
       tableQuery, 
-      options
+      options,
+      settings,
     })
     commit('setCytosis', cytosis)
     console.log(`[actions/loadCytosis from:${caller}]: done.`)

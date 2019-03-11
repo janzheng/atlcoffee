@@ -24,6 +24,17 @@
  */
 
 
+/* latin-ext */
+@font-face {
+  font-family: Baruta;
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/rns-baruta-black/RNS-B.ttf) format("truetype");
+  // src: local('Baruta') local('RNS Baruta Black'), url('/fonts/rns-baruta-black/RNS-B.ttf') format('truetype');
+}
+
+
+
 %font-mono,
 ._font-mono {
   font-family: Courier, Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', monospace;
@@ -31,6 +42,7 @@
 
 
 $font-sans: 'Work Sans', 'Roboto', "-apple-system", "BlinkMacSystemFont", "system-ui", "Segoe UI", "Encode Sans", "Open Sans", "Oxygen-Sans", "Helvetica", "arial", "sans-serif";
+$font-display: 'Baruta', 'Work Sans', 'Roboto', sans-serif;
 
 %font-sans, ._font-sans,
 %font-basic, ._font-basic {
@@ -40,15 +52,13 @@ $font-sans: 'Work Sans', 'Roboto', "-apple-system", "BlinkMacSystemFont", "syste
 
 %font-display,
 ._font-display {
-  font-family: 'Work Sans', 'Roboto', sans-serif;
-  @extend %font-sans;
+  font-family: 'Baruta', 'Work Sans', 'Roboto', sans-serif;
+  // @extend %font-sans;
 }
 
 
 $use-cssvars: false;
 $use-colorate: false;
-
-
 
 
 
@@ -72,6 +82,8 @@ $use-colorate: false;
 
 
 
+
+
 /* 
 
   Default variable overrides
@@ -88,6 +100,7 @@ $phdir-sizes: (
   lineheight: 24px,
   font-small: 13px,
   size: 15px,
+  nav-size: 18px,
   font-large: 17px,
 
   z-top: 90,
@@ -293,5 +306,3 @@ $link-color-hover: usetheme(active);
 
 // re-cascade
 @import '../../node_modules/coeur/styles/_head-helpers.scss';
-
-

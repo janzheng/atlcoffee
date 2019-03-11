@@ -1,6 +1,6 @@
 <template>
   <div id="top" class="ContentFrame Layout" >
-    <Header/>
+    <Header :scrollY="scrollY" />
     
     <div class="" >
       <nuxt/>

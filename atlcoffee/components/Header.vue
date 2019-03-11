@@ -1,22 +1,38 @@
 
 <template>
   <!-- <header class="Header _section-page _padding-top _padding-bottom _margin-center"> -->
-  <header class="Header _padding-top _padding-bottom _margin-center">
-    <router-link to="/" class="Header-title" v-html="$md.render(title || '')" />
-    <router-link v-for="nav of navs" :to="'/'+$slugify(nav, {lower: true})" :key="nav" class="_margin-right">{{ nav }}</router-link>
-  </header>
+
+  <div :style="{height: navHeight+'px'}" class="Header-container" >
+    <!-- if using a fixed header, the header-container height maintains the original height -->
+    <header ref="nav" class="Header --fixed _margin-center" >
+      <div class="_grid-1-3-1 _align-vertically">
+        <router-link to="/" class="Header-title" v-html="$md.render(title || '')" />
+        <div>
+          <router-link v-for="nav of navs" :to="'/'+$slugify(nav, {lower: true})" :key="nav" class="Header-nav _margin-right">{{ nav }}</router-link>
+        </div>
+        <div class="_right-sm">
+          <router-link to="/contact">Contact</router-link>
+        </div>
+      </div>
+    </header>
+  </div>
 </template>
 
 
 <script>
 export default {
+
+  props: {
+    scrollY: Number,
+  },
+
   data () {
     return {
       title: this.$cytosis.find('Content.title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
       navs: this.$cytosis.find('Content.header-nav', {'Content': this.$store.state['Content']} )[0]['fields']['List'],
+      navHeight: 300,
     }
   },
-  
 
   computed: {
     searchString: {
@@ -35,6 +51,14 @@ export default {
     }
   },
 
+  mounted() {
+    this.navHeight = this.$refs.nav.clientHeight
+    this.$store.dispatch('updateCreate', { 
+      "navHeight": this.$refs.nav.clientHeight,
+      "windowHeight": window.innerHeight,
+    })
+  },
+  
   methods: {
     search() {
       console.log("handling search:",this.searchString)
@@ -60,19 +84,6 @@ export default {
 
 <style lang="scss" scoped>
 
-.logo {
-  position: relative;
-  width: 45px;
-  top: 3px;
-}
-
-.logo-xs {
-  position: relative;
-  width: 45px; //34px;
-  // top: 3px;
-  // margin-right: 16px;
-  vertical-align: bottom;
-}
 
 </style>
 

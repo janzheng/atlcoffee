@@ -31,35 +31,15 @@ async function loadData(routeName, store, env) {
   let staticData, dynamicData
 
   staticData = loadStatic(env, store, routeName)
-
-  // Load dynamic data
-  // checks to prevent over-eager fetching?
-  // if(!store.state.Organizations)
-  // const cytosis = await store.dispatch('loadCytosis', {
   dynamicData = loadDynamic(env, store, routeName)
 
-  // newsData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
-  //   env,
-  //   tableQuery: 'news',
-  // })
-
-  // const results = await Promise.all([staticData, dynamicData])
-  
-  // return Promise.all([staticData, dynamicData]).then((results) => {
-  //   console.log('loaded:', !!staticD, !!dynamicD)
-  //   return Promise.resolve(results)
-  // })
-  // newsData = loadNews(env, store, routeName)
-
   return Promise.all([staticData, dynamicData])
-  // return Promise.all([staticData, dynamicData, newsData])
-  // }
 }
 
 
-async function loadQueryData(routeName, store, env, tableQuery) {
+async function loadQueryData(routeName, store, env, tableQuery, keyword) {
   let data
-  data = await loadQuery(env, store, routeName, tableQuery)
+  data = await loadQuery(env, store, routeName, tableQuery, keyword)
   // console.log('[loadQueryData] data', data)
   return Promise.all([data])
 }
@@ -93,10 +73,11 @@ export default async function ({route, env, store}) {
   }
 
   // specific data requests can be set through meta: in page templates, to reduce server load
-  let tableQuery, tableQueries
+  let tableQuery, tableQueries, keyword
   route.meta.map((meta) => {
     tableQuery = meta.tableQuery
     tableQueries = meta.tableQueries
+    keyword = route.params.slug // used to match keyword by field
   })[0]
 
 
@@ -115,13 +96,13 @@ export default async function ({route, env, store}) {
     if (tableQuery) {
       // console.log('[pageload] table query', tableQuery)
       // loads data from airtable based on a partial query
-      return loadQueryData(routeName, store, env, tableQuery)
+      return loadQueryData(routeName, store, env, tableQuery, keyword)
     } else if (tableQueries) {
-      
+      // in this case, we have multiple linked queries in airtable
       const getData = async function() {
         // console.log('tableQueries... ', tableQueries)
         let queryData = tableQueries.map( (query) => {
-          return loadQueryData(routeName, store, env, query)
+          return loadQueryData(routeName, store, env, query, keyword)
         })
         return Promise.all(queryData)
       }

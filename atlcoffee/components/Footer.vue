@@ -1,7 +1,7 @@
 <template>
   <div class="Footer --antialiased">
     <div class="_section-page _margin-center _padding-2">
-      <div class="_grid-2-xs">
+      <div class="_grid-2-xs _align-vertically">
         <div>Atlanta Coffee Shops</div>
         <div class="_right">
           <a class="_margin-right" target="_blank" href="https://www.instagram.com/atlantacoffeeshops/">Instagram</a>

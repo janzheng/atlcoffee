@@ -7,23 +7,7 @@ export default {
   searchString: '',
   searchUrl: '',
   cytosis: {},
-  
-  // test: 'init test',
-  // populate the tables so they can be reactive
-  // Content: {},
-  // Blog: {},
-  // Alerts: {},
-  // Tags: {},
-  // Terms: {},
-  // Phages: {},
-  // Organizations: {},
-  // Labs: {},
-  // People: {},
-  // Hosts: {},
-  // HostFamily: {},
-  // HostGenus: {},
-  // HostSpecies: {},
-  // Classification: {},
-  // Location: {},
-  
+
+  navHeight: 100, // height of nav header, calculated in Header and used for better ux
+  windowHeight: 100, // height of window inner height
 }
