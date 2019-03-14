@@ -1,48 +1,16 @@
 <template>
   <div class="Footer --antialiased">
     <div class="_section-page _margin-center _padding-2">
-      <div class="_grid-2-xs _align-vertically">
-        <div>Atlanta Coffee Shops</div>
+      <div class="_grid-1-3 _align-vertically">
+        <div class="_font-coffee">ATL <br> Coffee </div>
         <div class="_right">
-          <a class="_margin-right" target="_blank" href="https://www.instagram.com/atlantacoffeeshops/">Instagram</a>
-          <a class="" target="_blank" href="https://www.facebook.com/atlantacoffeeshops/">Facebook</a>
+          <a class="_margin-right-sm _block-xs _left-xs" target="_blank" href="mailto:hello@atlantacoffeeshops">hello@atlantacoffeeshops</a>
+          <a class="_margin-right-sm _block-xs _left-xs" target="_blank" href="https://www.instagram.com/atlantacoffeeshops/">Instagram</a>
+          <a class="_block-xs _left-xs" target="_blank" href="https://www.facebook.com/atlantacoffeeshops/">Facebook</a>
         </div>
       </div>
     </div>
-    <!-- <section class="Content _grid-1-3 _padding-left _padding-right _margin-center">
-
-      <div class="Footer-left _center-xs _align-vertically">
-        <router-link to="/" aria-label="Phage Directory Footer">
-          <img class="Footer-logo _v-middle" src="/phagedirectory_negative.png" alt="Phage Directory footer" >
-        </router-link>
-      </div>
-
-      <div class="Footer-right _center-xs">
-        <div class="_right-sm _center-xs">
-          <div class=" ">
-            <span class="_margin-right "><router-link to="/about">About Us</router-link></span>
-            <span class="_margin-right "><router-link to="/contact">Contact Us</router-link></span>
-            <span class="_block-xs"><router-link to="/classroom">Classroom Initiative</router-link></span>
-          </div>
-          <div class="_block-xs _margin-top-2-xs">
-            <span class="_margin-left-sm _margin-right "><router-link to="/services">Services</router-link></span>
-            <span class=" _margin-right "><router-link to="/services#ads">Post an Ad</router-link></span>
-            <span class=" _margin-right "><router-link to="/services#jobs">Post a Job</router-link></span>
-            <span class="_margin-right "><router-link to="/brand">Brand</router-link></span>
-            <span class=" "><router-link to="/policies">Site Policy</router-link></span>
-          </div>
-        </div>
-
-        <div class="_right-sm _center-xs _margin-top-2-xs">
-          <span class="_margin-right _block-xs _margin-bottom-half-xs">
-            <a target="_blank" href="mailto:hello@phage.directory">hello@phage.directory</a>
-          </span>
-          <span class=" _block-xs ">
-            <a target="_blank" href="https://twitter.com/phagedirectory">@phagedirectory</a>
-          </span>
-        </div>
-      </div>
-    </section> -->
+    
   </div>
 </template>
 

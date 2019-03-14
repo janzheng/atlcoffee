@@ -11,42 +11,42 @@
 
 
 .Header-title {
-  margin-right: $size-2;
+  // margin-right: $size-2;
 
-  &, * {
-    // padding-bottom: $size-2;
-    font-family: $font-display;
-    // font-size: 2.2em;
-    font-size: 32px;
-    letter-spacing: 2px;
-    line-height: 32px * 1;
-    display: inline-block;
-    vertical-align: middle;
-    color: white !important;
-    // font-weight: 700;
-  }
+  // &, * {
+  //   // padding-bottom: $size-2;
+  //   font-family: $font-display;
+  //   // font-size: 2.2em;
+  //   font-size: 32px;
+  //   letter-spacing: 2px;
+  //   line-height: 32px * 1;
+  //   display: inline-block;
+  //   vertical-align: middle;
+  //   // color: white !important;
+  //   // font-weight: 700;
+  // }
 }
 
-
-._header-image-container {
+$splash: 450px;
+._splash-container {
   position: relative;
-  top: -175px;
+  // top: -175px;
   left: 0;
   width: 100%;
-  height: 600px;
+  height: $splash;
 }
-  ._header-image-bg {
+  ._splash-image {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    // background-position: top;
     width: 100%;
-    height: 600px;
+    height: $splash;
   }
-
-
-.Header-nav {
-  font-size: 2.5em;
-}
+  .Coffee-splash {
+    filter: grayscale(0.4) opacity(0.9) brightness(1.1);
+    background-position-y: -18px; // offset the beam at the top of that image
+  }
 
 
 
@@ -140,4 +140,54 @@
   word-break: break-word;
 
 }
+
+
+
+
+._hide {
+  visibility: hidden;
+  &-i {
+    visibility: hidden !important;
+  }
+}
+._visible {
+  visibility: visible;
+  &-i {
+    visibility: visible !important;
+  }
+}
+
+%masonry {
+  & > * {
+    display: inline-block;
+  }
+}
+._masonry-2 {
+  column-count: 2;
+  column-gap: $size/2;
+  @extend %masonry;
+}
+._masonry-3 {
+  column-count: 3;
+  column-gap: $size/2;
+  @extend %masonry;
+}
+._masonry-4 {
+  column-count: 4;
+  column-gap: $size/2;
+  @extend %masonry;
+}
+
+// used for medium-like full-width images
+._image-stretch-bg {
+  margin-top: $size*2;
+  margin-bottom: $size*2;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+
 

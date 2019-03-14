@@ -1,12 +1,12 @@
 <template>
-  <div class="Home _section-page _margin-center _padding-left-2 _padding-right-2">
+  <div class="Home Sectional _section-page _margin-center _padding-left-2 _padding-right-2 _margin-bottom-3 _margin-top-3">
 
-    <div class="_section-content">
-      <div class="_section-article">
-        <img :src="images[0]['thumbnails']['large']['url']" width="600" alt="about coffee header">
-      </div>
-      <div class="_section-article" v-html="$md.render(content || '')" />
-    </div>
+    <!-- <div class="_section-content"> -->
+    <!-- <div class="_section-article"> -->
+    <!-- <img :src="images[0]['thumbnails']['large']['url']" width="600" height="300" alt="about coffee header" class="Sectional-header"> -->
+    <!-- </div> -->
+    <div class="" v-html="$md.render(content || '')" />
+    <!-- </div> -->
 
   </div>
 </template>

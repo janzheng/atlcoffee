@@ -3,7 +3,7 @@
     <Header :scrollY="scrollY" />
     
     <div class="" >
-      <nuxt/>
+      <nuxt />
     </div>
 
     <Footer/>

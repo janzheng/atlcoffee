@@ -1,24 +1,23 @@
 
+
 .Footer {
-  background-color: $color-secondary;
-  color: $color-bg;
-
-  @include screen-xs {
-    margin-bottom: $size-8;
-    // to make room for driftt
-  }
-
-  span {
-    white-space: nowrap;
-  }
+  background-color: usetheme(footer-bg);
+  color: usetheme(footer-copy);
+  font-size: $font-large;
+  
+  // span {
+  //   white-space: nowrap;
+  // }
 
   a {
     text-decoration: none;
-    color: $color-bg;
+    color: usetheme(footer-links); //$color-bg;
     border: 0;
     line-height: $size-3;
+    // font-weight: bold;
     &:hover {
-      color: $color-phdir;
+      color: usetheme(footer-active); //$color-phdir;
+      text-decoration: underline;
     }
   }
   .nuxt-link-exact-active, 
@@ -30,35 +29,5 @@
   .Footer-top {
     margin-right: $size-8;
   }
-  .Footer-logo {
-    max-width: 180px; 
-  }
 
 }
-
-
-.Footer-logo-sm {
-  width: 45px;
-  // height: 100%;
-  vertical-align: middle;
-  padding-bottom: 4px;
-  padding-right: $size-half;
-}
-.Phagedirectory-text { // phage directory text, used in footer
-  span {
-    font-weight: 700;
-  }
-}
-
-
-// logo deets
-// .logo-sm {
-//   // padding-right: $size-half;
-//   width: 80px;
-//   // height: 100%;
-//   vertical-align: middle;
-//   padding-bottom: $size-half;
-// }
-
-
-

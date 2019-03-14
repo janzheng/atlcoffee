@@ -1,7 +1,7 @@
 
 .PolicyBanner {
-  background: $color-phdir;
-  color: $color-gray;
+  background: usetheme(main); //$color-phdir;
+  color: usetheme(copy); //$color-gray;
   border-radius: $radius;
 
   padding: $size-base;
@@ -16,7 +16,7 @@
 
   .PolicyBanner-btn {
     &:hover {
-      background-color: $color-links;
+      background-color: usetheme(active); // $color-links;
     }
   }
 }

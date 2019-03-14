@@ -19,7 +19,7 @@ const site_name = 'ATL Coffee Directory';
 const site_title = 'ATL Coffee Directory';
 const site_twitter = '';
 const site_twitter_creator = '';
-const site_color = '#374F6A';
+const site_color = '#C24328';
 const site_description = 'A curated exploration of Atlanta’s up and coming coffee shops';
 
 // const site_ico = '/ico_dull.png';
@@ -29,7 +29,7 @@ const site_search = 'index,follow';
 const site_author = 'Jan Zheng';
 const page_name = ''; // placeholder for the copy+paste
 
-const site_fb = '172737416727733'; // buildAtl fb id
+const site_fb = ''; // buildAtl fb id
 
 const airtable_api = 'keyAe6M1KoPfg25aO'; // cytosisreader@zeee.co handler
 const airtable_base = 'appx91QZ73ZK7A2vH'; // coffee repo

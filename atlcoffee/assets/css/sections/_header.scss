@@ -7,6 +7,22 @@
   max-width: $width-lg-min;
   padding-left: $size-2;
   padding-right: $size-2;
+  padding-bottom: $size/2;
+
+  // what's the nav look like when it's affixed to the top
+  &.--top {
+    background-color: usetheme(header-bg-top);
+    padding-top: $size;
+    @extend %ease;
+  }
+
+  // what's the nav look like when scrolling
+  // &.--scroll {
+  padding-top: $size/2;
+  background-color: usetheme(header-bg-scroll);
+  @extend %ease;
+  // }
+
 
   &.--fixed {
     position: fixed;
@@ -21,21 +37,30 @@
   }
 
   a {
-    @include screen-sm {
-      // font-size: usetheme(font-large), // $font-large;
-      font-size: usetheme(nav-size), // $font-large;
-    }
+    color: usetheme(header-links);
     // font-size: $size-larger;
     text-decoration: none;
+
+    // @include screen-sm {
+      // font-size: usetheme(font-large), // $font-large;
+      font-size: usetheme(nav-size); // $font-large;
+    // }
+    &:hover {
+      color: usetheme(header-active);
+      text-decoration: underline;
+    };
   }
   .nuxt-link-exact-active {
     // @extend %links-bg;
     @extend %font-bold;
+    color: usetheme(header-active);
   }
   .Header-orgs.nuxt-link-active {
     // @extend %links-bg;
     @extend %font-bold;
+    color: usetheme(header-active);
   }
+
   .Header-search {
     border: $border-thin solid usetheme(bg-lighter); //;$color-ui-light;
     border-radius: $radius;
@@ -56,12 +81,6 @@
     }
   }
 
-  .Header-inset {
-    background-color: usetheme(bg-silver); //$color-silver-light;
-    border-radius: $radius;
-    padding-top: $size-half;
-    padding-bottom: $size-half;
-  }
 
   // header link
   .Header-logo-link {
@@ -70,5 +89,10 @@
     }
   }
 
+  .Header-title {
+    @extend ._font-coffee;
+    color: usetheme(title-color);
+    text-decoration: none !important;
+  }
 }
 

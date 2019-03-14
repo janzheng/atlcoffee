@@ -3,21 +3,29 @@
 
     <div class="_section-content">
       <div class="_section-article" v-html="$md.render(content || '')" />
-
-      <div class="Cafe-filters _section-article" >
-        <input id="Cafe-search" ref="cafeSearch" v-model.trim="searchString" class="Cafe-search _form-input " type="text" name="Cafe-search" placeholder="Search" @input="doSearch">
-      </div>
     </div>
 
-    <div class="_section-article _padding-bottom-2">
-      <div v-for="cafe of Cafes" :key="cafe.id" class="Cafe-card" >
-        <router-link v-if="cafe.fields['Slug']" :to="'/cafe/'+cafe.fields['Slug']" >{{ cafe.fields['Name'] }}</router-link>
-        <div v-else>{{ cafe.fields['Name'] }}</div>
+    <div class="CoffeeShops-main _grid-3-2">
+      <div class="_section-article _padding-bottom-2">
+        <div class="CoffeeShops-filters _section-article" >
+          <input id="CoffeeShops-search" ref="cafeSearch" v-model.trim="searchString" class="CoffeeShops-search _form-input " type="text" name="CoffeeShops-search" placeholder="Search (e.g. 'cafe')" @input="doSearch">
+        </div>
+
+        <div v-for="cafe of Cafes" :key="cafe.id" class="CoffeeShops-card" >
+          <router-link v-if="cafe.fields['Slug']" :to="'/cafe/'+cafe.fields['Slug']" >{{ cafe.fields['Name'] }}</router-link>
+          <div v-else>{{ cafe.fields['Name'] }}</div>
+        </div>
       </div>
+
+      <div class="CoffeeShops-map">
+        <div class="_card _padding " v-html="$md.render(map || '')" />
+      </div>
+
     </div>
 
   </div>
 </template>
+
 
 
 
@@ -52,6 +60,7 @@ export default {
   data () {
     return {
       content: this.$cytosis.find('Content.coffee-page', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      map: this.$cytosis.find('Content.coffee-map', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
       searchString: '',
       searchCafe: false,
     }

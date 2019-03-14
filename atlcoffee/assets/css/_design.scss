@@ -67,7 +67,7 @@ p, ul, li, {
   // @extend %font-serif;
 
   a { // in-paragraph links
-    font-weight: 700;
+    // font-weight: 700;
     &+a {
     }
   }
@@ -84,7 +84,12 @@ a, ._link {
   // color: $color-green;
   // @extend ._pointer-no_events;
   // @extend %ease-fast;
-  &:hover {
+
+  &:visited {
+    color: usetheme(links);
+  };
+
+  &:hover, &:active {
     color: usetheme(active); //$color-links;
   }
 
