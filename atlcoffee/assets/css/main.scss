@@ -27,13 +27,13 @@
   // }
 }
 
-$splash: 450px;
+// $splash: 450px;
 ._splash-container {
   position: relative;
   // top: -175px;
   left: 0;
   width: 100%;
-  height: $splash;
+  // height: $splash;
 }
   ._splash-image {
     background-repeat: no-repeat;
@@ -41,7 +41,7 @@ $splash: 450px;
     background-position: center;
     // background-position: top;
     width: 100%;
-    height: $splash;
+    // height: $splash;
   }
   .Coffee-splash {
     filter: grayscale(0.4) opacity(0.9) brightness(1.1);
@@ -167,6 +167,15 @@ $splash: 450px;
   column-gap: $size/2;
   @extend %masonry;
 }
+  ._masonry-2-sm {
+    @include screen-sm {
+      column-count: 2;
+      column-gap: $size/2;
+      & > * {
+        display: inline-block;
+      }
+    }
+  }
 ._masonry-3 {
   column-count: 3;
   column-gap: $size/2;
@@ -188,6 +197,21 @@ $splash: 450px;
 }
 
 
+.Feed-item {
+  h6 {
+    padding: 0;
+    font-weight: normal;
+  }
+  h5 {
+    padding-top: 2px;
+    padding-bottom: 4px;
+  }
+}
 
 
+._grid-gap-large-sm {
+  @include screen-sm {
+    grid-gap: $size-base*2;
+  }
+}
 

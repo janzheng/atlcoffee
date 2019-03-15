@@ -197,6 +197,7 @@ module.exports = (async function() {
       // { src: '~/plugins/hotjar.js', ssr: false }, // need to link this to policy
       // { src: '~/plugins/mixpanel.js', ssr: false },
       { src: '~/plugins/twitter.js', ssr: false },
+      { src: '~/plugins/lazyload.js', ssr: false },
       // { src: '~/plugins/paypal.js', ssr: false },
       { src: '~/plugins/markdownit.js' },
       { src: '~/plugins/cytosis.js' },

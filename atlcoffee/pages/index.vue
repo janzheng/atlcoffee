@@ -1,16 +1,46 @@
 <template>
-  <div>
+  <div :style="{top: navHeight * -1 + 'px'}" class="_splash-container">
 
-    <div v-if="header" ref="splash" :style="{top: navHeight * -1 + 'px'}" class="_splash-container">
-      <div :style="{backgroundImage: 'url('+header.url+')'}" class="Coffee-splash _splash-image" />
+    <div v-if="header" ref="splash" :style="{minHeight: 450+'px', height: 50+'vh'}" class=" _vh-50">
+      <div :style="{backgroundImage: 'url('+header.url+')', height: '100%'}" class="Coffee-splash _splash-image" />
     </div>
 
-    <div class="Home _section-page _margin-center _padding-left-2 _padding-right-2">
+    <div class="Home _section-page _margin-center">
       <div class="_section-content">
         <div class="_section-article" v-html="$md.render(intro || '')" />
       </div>
-      <div class="_section-content">
+      <div class="_grid-3-2 _grid-gap-large-sm">
+        <div class="Latest">
+          <div class="Latest-cafes _margin-bottom-2">
+            <h4>Latest Cafes</h4>
+            <div class="Latest-cafes-container _margin-bottom-2 _masonry-2-sm">
+              <div v-for="item of latestCafes" :key="item.id" >
+                <div class="_card _padding">
+                  <h5>{{ item.fields['Name'] }}</h5>
+                  <div v-html="$md.render(item.fields['Descriptor'] || '')" /> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="Latest-stories">
+            <h4>Latest Stories</h4>
+            <div class="Latest-stories-container _margin-bottom-2">
+              <div v-for="item of latestStories" :key="item.id">
+                <div class="_card _padding">{{ item.fields['Name'] }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- <div class="_card _padding " v-html="$md.render(map || '')" /> -->
+        <div class="Feed">
+          <div v-for="item of Recently" :key="item.id" class="Feed-item _padding-bottom">
+            <!-- {{ item }} -->
+            <h6> {{ item.fields['Date'] }}</h6>
+            <h5> {{ item.fields['Name'] }}</h5>
+            <p> {{ item.fields['Message'] }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -23,6 +53,7 @@
 
 
 import { mapState } from 'vuex'
+
 export default {
 
   components: {
@@ -31,7 +62,8 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
   meta: {
-    tableQuery: "_content"
+    // tableQuery: "_content"
+    tableQueries: ['_content', '_recently', '_stories-latest', '_cafes-latest']
   },
 
   async asyncData({env}) {
@@ -52,9 +84,19 @@ export default {
   computed: {
     ...mapState([
       'Content',
+      'Recently',
       'navHeight',
       ]),
 
+    latestStories() {
+      // only show first four
+      return this.$store.state['Stories'].slice(0,4) 
+    },
+
+    latestCafes() {
+      // only show first four
+      return this.$store.state['Cafes'].slice(0,4) 
+    }
   },
 
   beforeCreate () {

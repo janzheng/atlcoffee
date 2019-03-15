@@ -3,19 +3,14 @@
 
     <div class="_section-content">
 
-      {{ Stories }}
+      <!-- {{ Stories }} -->
 
-      <div v-for="story of Stories" :key="story.id" class="Stories-item">
-        <router-link :to="'/stories/'+story.fields['Slug']">{{ story.fields['Name'] }}</router-link>
+      <div v-for="story of Stories" :key="story.id" class="Stories-item _card _padding">
+        <router-link :to="'/stories/'+story.fields['Slug']">
+          <h4>{{ story.fields['Name'] }}</h4>
+        </router-link>
       </div>
 
-      <!-- <div class="_section-article" v-html="$md.render(content || '')" /> -->
-      <!-- {{ Cafes }} -->
-      <!-- <div class="_section-article">
-        <div class="Cafe-card" v-for="cafe of Cafes" :key="cafe.id">
-          {{ cafe.fields['Name'] }}
-        </div>
-      </div> -->
     </div>
 
   </div>

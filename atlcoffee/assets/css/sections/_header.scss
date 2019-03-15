@@ -40,17 +40,25 @@
     color: usetheme(header-links);
     // font-size: $size-larger;
     text-decoration: none;
+    margin-right: $size;
+    // white-space: nowrap;
 
-    // @include screen-sm {
+    @include screen-xs {
+      display: inline-block;
+    }
+
+    @include screen-sm {
+      margin-left: $size;
       // font-size: usetheme(font-large), // $font-large;
       font-size: usetheme(nav-size); // $font-large;
-    // }
+    }
     &:hover {
       color: usetheme(header-active);
       text-decoration: underline;
     };
   }
-  .nuxt-link-exact-active {
+  .nuxt-link-exact-active,
+  .nuxt-link-active {
     // @extend %links-bg;
     @extend %font-bold;
     color: usetheme(header-active);
@@ -91,6 +99,8 @@
 
   .Header-title {
     @extend ._font-coffee;
+    font-size: usetheme(size-title);
+    line-height: usetheme(lineheight-title);
     color: usetheme(title-color);
     text-decoration: none !important;
   }

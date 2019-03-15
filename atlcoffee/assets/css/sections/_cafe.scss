@@ -17,5 +17,30 @@
 
  	.CoffeeShops-search {
  		width: 100%;
- 		height: $size-4;
+ 		height: $size-5;
+ 		font-size: usetheme(size-search);
+ 		padding-top: $size;
+ 		padding-bottom: $size;
  	}
+
+
+
+
+.Story {
+	.Story-cover-img {
+		height: 400px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+	.Story-content {
+		img {
+			max-width: 100%;
+		}
+	}
+	.Story-footer {
+		font-style: italic;
+		padding-top: $size;
+		padding-bottom: $size;
+	}
+}

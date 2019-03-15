@@ -43,7 +43,7 @@ button.CTA, ._button.CTA, .CTA { // actionable button; inherits from but overrid
 
   &.--active,
   &.nuxt-link-exact-active,
-  .nuxt-link-active {
+  &.nuxt-link-active {
     &, &:hover {
       background-color: inherit;
       border-color: usetheme(links); //$color-links;

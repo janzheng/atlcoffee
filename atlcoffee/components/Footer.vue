@@ -1,6 +1,6 @@
 <template>
   <div class="Footer --antialiased">
-    <div class="_section-page _margin-center _padding-2">
+    <div class="_section-page _margin-center _padding-top-2 _padding-bottom-2">
       <div class="_grid-1-3 _align-vertically">
         <div class="_font-coffee">ATL <br> Coffee </div>
         <div class="_right">

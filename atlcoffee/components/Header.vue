@@ -85,7 +85,6 @@ export default {
 
   mounted() {
     this.navHeight = this.$refs.nav.clientHeight
-    console.log('mounted: ', this.$refs.nav.offsetHeight)
     this.$store.dispatch('updateCreate', { 
       "navHeight": this.$refs.nav.clientHeight,
       "windowHeight": window.innerHeight,

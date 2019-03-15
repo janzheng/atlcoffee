@@ -65,9 +65,13 @@ $sizes: (
   size-diff: 0,
   lineheight: 24px,
   font-small: 13px,
-  size: 15px,
-  nav-size: 20px,
-  font-large: 17px,
+  size: 16px,
+  nav-size: 19px,
+  size-search: 19px,
+  size-title: 28px,
+  lineheight-title: 28px*1.2,
+  font-large: 19px,
+
 
   z-top: 90,
   z-popup: 100,
@@ -255,9 +259,7 @@ $font-coffee: 'Baruta', 'Work Sans', 'Roboto', sans-serif;
 
 ._font-coffee { 
   font-family: $font-coffee;
-  font-size: $size-2;
   letter-spacing: 2px;
-  line-height: $size-2;
 }
 
 

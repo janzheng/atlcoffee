@@ -11,7 +11,7 @@
         We apologize... we couldn’t find what you were looking for, or something went wrong.
       </h1>
       <h3>
-        If you keep getting to this page but suspect you shouldn't be, please reach out to me (Jan) @ <a href="mailto:jan@phage.directory">jan@phage.directory</a>. Appreciate your help!
+        If you keep getting to this page but suspect you shouldn't be, please reach out to us at <a href="mailto:hello@atlantacoffeeshops.com">hello@atlantacoffeeshops.com</a>. Appreciate your help!
       </h3>
     </div>
   </div>
