@@ -25,8 +25,8 @@
           <div class="Coffee-description" v-html="$md.render(cafe.fields['Description'] || '')" />
           <div class="Coffee-stories">
             <div v-for="item of stories" :key="item.id" class="Coffee-story _card _padding">
-              <h6>Story</h6>
-              <h5>{{ item.fields['Name'] }}</h5>
+              <h6 class="_padding-none-i">Story</h6>
+              <router-link :to="`/stories/${item.fields['Slug']}`"><h5>{{ item.fields['Name'] }}</h5></router-link>
               <div v-html="$md.render(item.fields['Lede'] || '')" />
             </div>
           </div>
@@ -95,6 +95,7 @@
 <script>
 
 import { mapState } from 'vuex'
+import { loadQuery } from '~/other/loaders'
 
 export default {
 
@@ -109,10 +110,15 @@ export default {
   },
 
   // runs on generation and page route (but not on first page load)
-  asyncData({route}) {
+  async asyncData({env, store, route}) {
     const slug = unescape(route.params.slug)
+
+    const _cafe = await loadQuery(env, store, 'coffee-async', '_cafe', slug)
+    console.log('matched cafes: ', _cafe)
+
     return {
       slug,
+      cafe: _cafe.tables['Cafes'][0],
     }
   },
 
@@ -126,10 +132,10 @@ export default {
       'Cafes',
       'Stories',
       ]),
-    cafe() {
-      // console.log('what? ', this.slug, this.Cafes, this.$cytosis.find(this.slug, {'Cafes': this.Cafes}, ['Slug'] ))
-      return this.$cytosis.find(this.slug, {'Cafes': this.Cafes}, ['Slug'] )
-    },
+    // cafe() {
+    //   // console.log('what? ', this.slug, this.Cafes, this.$cytosis.find(this.slug, {'Cafes': this.Cafes}, ['Slug'] ))
+    //   return this.$cytosis.find(this.slug, {'Cafes': this.Cafes}, ['Slug'] )
+    // },
     stories() {
       // these are the cafes linked to the establishment
       // sometimes there can be more, if it's a small chain
