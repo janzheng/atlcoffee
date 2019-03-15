@@ -6,7 +6,7 @@
     <!-- if using a fixed header, the header-container height maintains the original height -->
     <header ref="nav" :class="headerClass" class="Header --fixed _hide _margin-center" >
       <!-- navHeight: {{ navHeight }} -->
-      <div class="_grid-1-4 _grid-gap-large _align-vertically">
+      <div class="_grid-1-4-xs _grid-gap-large-sm _align-vertically">
         <!-- <router-link to="/" class="Header-title" v-html="$md.render(title || '')" /> -->
         <router-link to="/" class="Header-title " >ATL <br> Coffee</router-link>
         <div>

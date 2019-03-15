@@ -160,7 +160,7 @@ $context: (
 
   title-color: usetheme(_red), // used for logotype in nav
   header-bg-top: rgba(usetheme(_yellow), 0.02),
-  header-bg-scroll: rgba(usetheme(_yellow), 0.96),
+  header-bg-scroll: rgba(usetheme(silver-lighter, $colors_), 0.86),
   header-links: usetheme(_red),
   header-active: usetheme(pink),
 

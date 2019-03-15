@@ -11,9 +11,15 @@
           <input id="CoffeeShops-search" ref="cafeSearch" v-model.trim="searchString" class="CoffeeShops-search _form-input " type="text" name="CoffeeShops-search" placeholder="Search (e.g. 'cafe')" @input="doSearch">
         </div>
 
-        <div v-for="cafe of Cafes" :key="cafe.id" class="CoffeeShops-card" >
-          <router-link v-if="cafe.fields['Slug']" :to="'/cafe/'+cafe.fields['Slug']" >{{ cafe.fields['Name'] }}</router-link>
-          <div v-else>{{ cafe.fields['Name'] }}</div>
+        <div v-for="item of Cafes" :key="item.id" class="Coffee-card --wide _card _grid-1-3-xs" >
+          <div>
+            <img v-lazy="item.fields['Cover'][0]['thumbnails']['large']['url']" v-if="item.fields['Cover']" class="_width-full" >
+          </div>
+          <div class="_padding">
+            <router-link :to="`/cafe/${item.fields['Slug']}`" class="Coffee-card-title">{{ item.fields['Name'] }}</router-link>
+            <div>{{ item.fields['Location'] }}</div>
+            <!-- <div v-html="$md.render(item.fields['Description'] || '')" /> -->
+          </div>
         </div>
       </div>
 

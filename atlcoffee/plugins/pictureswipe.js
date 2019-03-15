@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import lazyload from 'vue-lazyload'
+import VuePictureSwipe from 'vue-picture-swipe'
 
 
-Vue.use(lazyload)
+Vue.use(VuePictureSwipe)
+Vue.component('vue-picture-swipe', VuePictureSwipe)
 
 // Vue.use(lazyload, {
 //   preLoad: 1.3,
@@ -11,7 +12,7 @@ Vue.use(lazyload)
 //   attempt: 1
 // })
 
-Vue.component('vue-lazyload', lazyload)
+// Vue.component('vue-lazyload', lazyload)
 
 
 // // export default ({ app }, inject) => {

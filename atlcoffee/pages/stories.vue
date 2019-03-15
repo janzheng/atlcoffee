@@ -5,10 +5,11 @@
 
       <!-- {{ Stories }} -->
 
-      <div v-for="story of Stories" :key="story.id" class="Stories-item _card _padding">
-        <router-link :to="'/stories/'+story.fields['Slug']">
-          <h4>{{ story.fields['Name'] }}</h4>
-        </router-link>
+      <div v-for="item of Stories" :key="item.id" class="Stories-item _card _padding">
+        <div class="_font-small _padding-bottom-half" >{{ item.fields['Date'] | niceDate }} </div>
+        <img v-lazy="item.fields['Cover'][0]['url']" v-if="item.fields['Cover']" height="180" >
+        <h4><router-link :to="'/stories/' + item.fields['Slug']">{{ item.fields['Name'] }}</router-link></h4>
+        <div class="" v-html="$md.render(item.fields['Lede'] || '')" />
       </div>
 
     </div>

@@ -8,33 +8,38 @@
       <div v-lazy:background-image="story['Cover'][0]['url']" class="Story-cover-img" />
     </div> -->
 
-    <div v-if="story['Cover']" ref="splash" :style="{minHeight: 450+'px', height: 50+'vh'}" class="Story-cover _padding-top">
+    <div v-if="story['Cover']" ref="splash" :style="{minHeight: 450+'px', height: 50+'vh'}" class="Story-cover _padding-top-2">
       <div v-lazy:background-image="story['Cover'][0]['url']" class="Story-cover-img _splash-image" />
     </div>
 
-    <div class="Story _section-page _margin-center _padding-left-2 _padding-right-2">
+    <div class="Story-main _section-page _margin-center _padding-left-2 _padding-right-2">
       <div class="Story-headmatter _section-content">
         <h1> {{ story['Name'] }} </h1>
-
-        <!-- BANANA
-        <div>{{ story }}</div>
-        <div>{{ Cafes }}</div> -->
-
 
         <h5 v-html="$md.render(story['Lede'] || '')" />
 
         <!-- author info  -->
-        <div v-for="item of authors" :key="item.id" class="Author-card ">
+        <div v-for="item of authors" :key="item.id" class="Author _grid-auto-1-xs">
           <div>
             <img :style="{borderRadius: '100%'}" :src="item.fields['Profile'][0]['url']" width="60" height="60" >
           </div>
-          {{ item.fields['Name'] }}
+          <div>
+            <div class="Author-name">{{ item.fields['Name'] }}</div>
+            <div class="Author-about">{{ item.fields['About'] }}</div>
+          </div>
         </div>
 
         <!-- linked cafes -->
         <div class="Story-cafes">
-          <div v-for="item of cafes" :key="item.id" class="Story-cafe">
-            <router-link :to="`/cafe/${item.fields['Slug']}`">{{ item.fields['Name'] }}</router-link>
+          <div v-for="item of cafes" :key="item.id" class="Coffee-card _card _grid-1-3-xs">
+            <div>
+              <img v-lazy="item.fields['Cover'][0]['thumbnails']['large']['url']" v-if="item.fields['Cover']" class="_width-full" >
+            </div>
+            <div class="_padding">
+              <router-link :to="`/cafe/${item.fields['Slug']}`" class="Coffee-card-title">{{ item.fields['Name'] }}</router-link>
+              <div>{{ item.fields['Location'] }}</div>
+              <!-- <div v-html="$md.render(item.fields['Description'] || '')" /> -->
+            </div>
           </div>
         </div>
 
@@ -53,9 +58,16 @@
         </div> -->
       </div>
 
+
       <div v-if="story['Footer']" class="Story-footer _section-content" >
         <div class="" v-html="$md.render(story['Footer'] || '')" />
       </div>
+
+      <!-- <no-ssr> -->
+      <div id="comment" class="disqus _section-content" >
+        <div id="disqus_thread" />
+      </div>
+      <!-- </no-ssr> -->
 
       <!-- {{ story }} -->
     </div>
@@ -72,7 +84,7 @@
 <script>
 
 import { mapState } from 'vuex'
-import {loadQuery} from '~/other/loaders'
+import { loadQuery } from '~/other/loaders'
 
 
 export default {
@@ -87,7 +99,12 @@ export default {
     tableQueries: ["_content", "_authors"],
   },
 
+  // CAUTION: fetching limited data sets or using matching can cause data conflicts
+  // with other views, since data is pulled lazily (if an item in a table exists, we generally don't want to keep pulling them)
+  // sometimes the data actually needs to be refreshed, since we sometimes only pull a couple of columns and not all of them, causing some problems
+  // the best way is to pull data on async to ensure we have everything
   // runs on generation and page route (but not on first page load)
+  // 
   async asyncData({env, store, route}) {
     const slug = unescape(route.params.slug)
 
@@ -115,10 +132,6 @@ export default {
       'Authors',
       'navHeight',
       ]),
-    // story() {
-      // console.log('what? ', this.slug, this.Cafes, this.$cytosis.find(this.slug, {'Cafes': this.Cafes}, ['Slug'] ))
-      // return this.$cytosis.find(this.slug, {'Stories': this.Stories}, ['Slug'] )['fields']
-    // },
     cafes() {
       // these are the cafes linked to the establishment
       // sometimes there can be more, if it's a small chain
@@ -134,18 +147,30 @@ export default {
     // special header behavior
     this.$store.dispatch("updateCreate", {diffTopHeader: true})
   },
-  mounted () {
+  mounted: async function () {
     // special header behavior
     this.$store.dispatch("updateCreate", {splashHeight: this.$refs.splash.clientHeight})
+
+    // load disqus
+    if (!process.server) {
+      // const _this = this
+      // const disqus_config = function () {
+      //   _this.page.url = _this.slug;  // Replace PAGE_URL with your page's canonical URL variable
+      //   _this.page.identifier = _this.slug; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      // };
+      
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script')
+      s.src = 'https://atl-coffee.disqus.com/embed.js'
+      s.setAttribute('data-timestamp', +new Date()) (d.head || d.body).appendChild(s) })()
+    }
   },
   beforeDestroy() {
     this.$store.dispatch("updateCreate", {diffTopHeader: false, splashHeight: 0})
   },
 
-
   methods: {
   },
-
 
 }
 </script>

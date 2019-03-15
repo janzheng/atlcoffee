@@ -1,12 +1,22 @@
 <template>
   <div class="Home _section-page _margin-center _padding-left-2 _padding-right-2">
 
+    vue pic swipe
+
+    <vue-picture-swipe :items="[
+      {src: 'http://placekitten.com/600/400',thumbnail: 'http://placekitten.com/60/90',w: 600,h: 400, title: 'Will be used for caption'},
+      {src: 'http://placekitten.com/1200/900',thumbnail: 'http://placekitten.com/80/80',w: 1200,h: 900}
+    ]" class="vueSwipe-test "></vue-picture-swipe>
+
+    ^^^^^ END vue pic swipe
+
     <div class="_section-content">
       <div class="_section-article">
         <img :src="images[0]['thumbnails']['large']['url']" width="600" alt="about coffee header">
       </div>
       <div class="_section-article" v-html="$md.render(content || '')" />
     </div>
+
 
     Paypal test:
 

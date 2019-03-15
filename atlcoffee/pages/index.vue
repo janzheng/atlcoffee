@@ -17,7 +17,7 @@
               <div v-for="item of latestCafes" :key="item.id" >
                 <div class="_card _padding">
                   <h5>{{ item.fields['Name'] }}</h5>
-                  <div v-html="$md.render(item.fields['Descriptor'] || '')" /> 
+                  <div v-html="$md.render(item.fields['Description'] || '')" /> 
                 </div>
               </div>
             </div>
