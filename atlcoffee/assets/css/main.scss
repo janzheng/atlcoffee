@@ -164,13 +164,13 @@
 }
 ._masonry-2 {
   column-count: 2;
-  column-gap: $size/2;
+  column-gap: $size;
   @extend %masonry;
 }
   ._masonry-2-sm {
     @include screen-sm {
       column-count: 2;
-      column-gap: $size/2;
+      column-gap: $size;
       & > * {
         display: inline-block;
       }
@@ -178,12 +178,12 @@
   }
 ._masonry-3 {
   column-count: 3;
-  column-gap: $size/2;
+  column-gap: $size;
   @extend %masonry;
 }
 ._masonry-4 {
   column-count: 4;
-  column-gap: $size/2;
+  column-gap: $size;
   @extend %masonry;
 }
 
@@ -208,6 +208,17 @@
   }
 }
 
+
+._grid-gap-none-xs {
+  @include screen-xs {
+    grid-gap: 0;
+  }
+}
+._grid-gap-none-sm {
+  @include screen-sm {
+    grid-gap: 0;
+  }
+}
 
 ._grid-gap-large-sm {
   @include screen-sm {

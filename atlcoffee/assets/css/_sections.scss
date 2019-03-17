@@ -50,6 +50,17 @@ section {
 // Creates margins for the page 
 ._section-page {
   @extend ._width-content-max;
+
+  // custom for coffee shops
+  @include screen-xs {
+    padding-left: $size;
+    padding-right: $size;
+    padding-top: $size-2; // for the header
+  }
+  @include screen-sm {
+    padding-left: $size*2;
+    padding-right: $size*2;
+  }
 }
 
 // Creates margins for content within a page
@@ -62,6 +73,7 @@ section {
     margin-top: $size;
     margin-bottom: $size;
   }
+
 }
 
 

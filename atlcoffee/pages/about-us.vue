@@ -1,5 +1,5 @@
 <template>
-  <div class="Home Sectional _section-page _margin-center _padding-left-2 _padding-right-2 _margin-bottom-3 _margin-top-3">
+  <div class="About _section-page _margin-center">
 
     <!-- <div class="_section-content"> -->
     <!-- <div class="_section-article"> -->

@@ -6,15 +6,15 @@
     <!-- if using a fixed header, the header-container height maintains the original height -->
     <header ref="nav" :class="headerClass" class="Header --fixed _hide _margin-center" >
       <!-- navHeight: {{ navHeight }} -->
-      <div class="_grid-1-4-xs _grid-gap-large-sm _align-vertically">
+      <div class="_grid-1-4 _grid-gap-none-xs _grid-gap-large-sm _align-vertically">
         <!-- <router-link to="/" class="Header-title" v-html="$md.render(title || '')" /> -->
         <router-link to="/" class="Header-title " >ATL <br> Coffee</router-link>
-        <div>
+        <div class="_flex-row _flex-vertically">
           <router-link v-for="nav of navs" :to="'/'+$slugify(nav, {lower: true})" :key="nav" class="Header-nav _margin-right">{{ nav }}</router-link>
+          <!-- <div class="_right-sm"> -->
+          <input id="search" ref="search" v-model.trim="searchString" class="Header-search _form-input _inline" type="text" name="search" placeholder="🔍 Search" @input="search">
+          <!-- </div> -->
         </div>
-        <!-- <div class="_right-sm">
-          <router-link to="/contact">Contact</router-link>
-        </div> -->
       </div>
     </header>
   </div>
@@ -96,12 +96,17 @@ export default {
     search() {
       console.log("handling search:",this.searchString)
       // const url = `/search/${this.searchString}`
-      const url = `/phages`
+      const urlbase = '/coffee-shops/'
+      const url = `${urlbase}?search=${this.searchString}`
       // console.log("search url:", url, "?", this.$router.history)
       // $router history push forces a page reload... use window to replace
       // store the searchstring into store?
       if(this.searchString != "")
         this.$router.replace(url)
+      else {
+        // empty search string
+        this.$router.replace(urlbase)
+      }
 
       // window.location = url;
       // this.$store.dispatch("updateCreate", {

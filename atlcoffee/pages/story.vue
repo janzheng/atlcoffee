@@ -37,7 +37,7 @@
             </div>
             <div class="_padding">
               <router-link :to="`/cafe/${item.fields['Slug']}`" class="Coffee-card-title">{{ item.fields['Name'] }}</router-link>
-              <div>{{ item.fields['Location'] }}</div>
+              <div>{{ item.fields['Neighborhood'] }}</div>
               <!-- <div v-html="$md.render(item.fields['Description'] || '')" /> -->
             </div>
           </div>
@@ -63,11 +63,11 @@
         <div class="" v-html="$md.render(story['Footer'] || '')" />
       </div>
 
-      <!-- <no-ssr> -->
-      <div id="comment" class="disqus _section-content" >
-        <div id="disqus_thread" />
-      </div>
-      <!-- </no-ssr> -->
+      <no-ssr>
+        <div id="comment" class="disqus _section-content" >
+          <div id="disqus_thread" />
+        </div>
+      </no-ssr>
 
       <!-- {{ story }} -->
     </div>
@@ -150,19 +150,26 @@ export default {
   mounted: async function () {
     // special header behavior
     this.$store.dispatch("updateCreate", {splashHeight: this.$refs.splash.clientHeight})
+  },
+  created: async function () {
 
     // load disqus
-    if (!process.server) {
-      // const _this = this
-      // const disqus_config = function () {
-      //   _this.page.url = _this.slug;  // Replace PAGE_URL with your page's canonical URL variable
-      //   _this.page.identifier = _this.slug; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      // };
-      
+    if (process.client) {
+
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
       (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script')
-      s.src = 'https://atl-coffee.disqus.com/embed.js'
-      s.setAttribute('data-timestamp', +new Date()) (d.head || d.body).appendChild(s) })()
+        var d = document, s = d.createElement('script')
+        s.src = 'https://atl-coffee.disqus.com/embed.js'
+        s.setAttribute('data-timestamp', +new Date())(d.head || d.body).appendChild(s)
+      })()
     }
   },
   beforeDestroy() {

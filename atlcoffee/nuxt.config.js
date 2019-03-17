@@ -14,7 +14,8 @@ import Cytosis from './other/cytosis'
 const site_policy = '1.0.0' 
 
 const site_ga = 'UA-135028812-1' 
-const site_url = 'https://atlantacoffeeshops.com'
+// const site_url = 'https://atlantacoffeeshops.com'
+const site_url = 'http://atlcoffee.surge.sh'
 const site_name = 'ATL Coffee Directory';
 const site_title = 'ATL Coffee Directory';
 const site_twitter = '';
@@ -325,6 +326,11 @@ module.exports = (async function() {
         // capsid should resolve anything from phages
         // to people and orgs; easier w/ a uniform id resolver
         routes.push(
+          {
+            name: 'coffeeSearch',
+            path: '/coffee-shops/:slug',
+            component: resolve(__dirname, 'pages/coffee-shops.vue')
+          },
           {
             name: 'coffeePage',
             path: '/cafe/:slug',
