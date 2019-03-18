@@ -72,7 +72,7 @@ export default {
   },
 
   // runs on generation and page route (but not on first page load)
-  async asyncData({env}) {
+  async asyncData({env, route}) {
 
     return {
       postUrl: env.ext_handler,
@@ -87,7 +87,7 @@ export default {
       searchString: null,
       searchITP: null,
       isRecommended: null,
-      querySearchString: null,
+      // querySearchString: null,
       cafeResults: null, // set of results from a custom search
     }
   },
@@ -126,12 +126,20 @@ export default {
     $route (to){
       // get search query from the parameter
       console.log('updated search query: ', this.$route.query.search, to)
-      this.querySearchString = this.$route.query.search
+      // this.querySearchString = this.$route.query.search
+      this.searchString = this.$route.query.search // this.querySearchString
       this.doSearch()
     }
   },
 
   mounted() {
+    console.log('updated search query: ', this.$route.query.search)
+    // this.querySearchString = this.$route.query.search
+    if(this.$route.query.search) {
+      this.searchString = this.$route.query.search // this.querySearchString
+      this.doSearch()
+      
+    }
   },
 
   methods: {
@@ -178,7 +186,7 @@ export default {
       // let andFilterStr = ''
 
       /* Handle Search Term / keyword search */
-      const searchTerm = this.querySearchString || this.searchString
+      const searchTerm = this.searchString
       // console.log("handling search:", searchTerm)
 
       if (searchTerm && searchTerm.length > 0) {
