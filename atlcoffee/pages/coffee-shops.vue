@@ -35,6 +35,9 @@
             <div v-if="item.fields['Recommended']" class="Coffee-card-recommended" >🌟</div>
             <router-link :to="`/cafe/${item.fields['Slug']}`" class="Coffee-card-title">{{ item.fields['Name'] }}</router-link>
             <div class="Coffee-card-location">{{ item.fields['Neighborhood'] || item.fields['City'] }}</div>
+            <div v-if="stories(item).length > 0" class="Coffee-card-story _padding-top-half" >
+              <router-link v-for="subitem of stories(item)" :key="subitem.id" :to="`/stories/${subitem.fields['Slug']}`">Story: {{ subitem.fields['Name'] }}</router-link>
+            </div>
             <!-- <div v-html="$md.render(item.fields['Description'] || '')" /> -->
           </div>
         </div>
@@ -55,7 +58,7 @@
 
 <script>
 
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import Cytosis from '~/other/cytosis'
 import _ from 'lodash'
 
@@ -68,7 +71,7 @@ export default {
   middleware: 'pageload',
   meta: {
     // tableQuery: "_content",
-    tableQueries: ["_content", "_cafes"],
+    tableQueries: ["_content", "_cafes", "_stories"],
   },
 
   // runs on generation and page route (but not on first page load)
@@ -96,10 +99,11 @@ export default {
     Cafes() {
       // console.log('cafes:', this.cafeResults)
       return this.cafeResults || this.$store.state['Cafes']
-    }
-    // ...mapState([
-    //   'Cafes',
-    //   ]),
+    },
+    ...mapState([
+      // 'Cafes',
+      'Stories'
+      ]),
     // cafeSearch: _.throttle(async function() {
 
     //   console.log("handling search:",this.searchString)
@@ -143,6 +147,10 @@ export default {
   },
 
   methods: {
+    stories(cafe) {
+      console.log('stories/cafe', cafe.fields['Stories'], this.Stories)
+      return this.$cytosis.getLinkedRecords(cafe.fields['Stories'], this.Stories, true )
+    },
     doSearch: _.debounce(async function() {
 
       let filterObj = {
@@ -216,9 +224,7 @@ export default {
       //   ${andFilterStr}
       // )`
 
-
       console.log('filter text: ', getFilter() )
-
 
       // if search queries are empty, we return the full list
       if (filterObj['AND'].length == 0 && filterObj['OR'].length == 0) {
