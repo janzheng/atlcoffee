@@ -1,5 +1,5 @@
 <template>
-  <div class="About _section-page _margin-center">
+  <div class="About _section-page _margin-center _padding-bottom-2">
 
     <!-- <div class="_section-content"> -->
     <!-- <div class="_section-article"> -->

@@ -72,11 +72,11 @@
             </div>
           </div>
 
-          <div class="Coffee-sidebar-container">
+          <div v-if="cafe.fields['RoastPartner']" class="Coffee-sidebar-container" >
             <h6>Roasting Partner</h6>
-            <div v-if="cafe.fields['RoastPartner']" class="Coffee-sidebar-item" >
+            <div class="Coffee-sidebar-item" >
               <!-- <span v-for="item of cafe.fields['RoastSource']" class="_tag">{{ item }}</span> -->
-              <span v-html="$md.render(cafe.fields['RoastPartner'] || '')" />
+              <span v-html="$md.render(roastPartner || '')" />
             </div>
           </div>
 
@@ -106,7 +106,7 @@ export default {
   middleware: 'pageload',
   meta: {
     // tableQuery: "_content",
-    tableQueries: ["_content", "_cafes", "_stories",],
+    tableQueries: ["_content", "_cafes", "_stories", "_cafe-linked"],
   },
 
   // runs on generation and page route (but not on first page load)
@@ -131,6 +131,7 @@ export default {
     ...mapState([
       'Cafes',
       'Stories',
+      'Roasters',
       ]),
     // cafe() {
     //   // console.log('what? ', this.slug, this.Cafes, this.$cytosis.find(this.slug, {'Cafes': this.Cafes}, ['Slug'] ))
@@ -140,6 +141,9 @@ export default {
       // these are the cafes linked to the establishment
       // sometimes there can be more, if it's a small chain
       return this.$cytosis.getLinkedRecords(this.cafe.fields['Stories'], this.Stories, true )
+    },
+    roastPartner() {
+      return this.$cytosis.getLinkedRecords(this.cafe.fields['RoastPartner'], this.Roasters ).join(', ')
     },
     galleryItems() {
       const gallery = this.cafe.fields['Gallery']

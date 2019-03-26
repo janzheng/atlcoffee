@@ -2,6 +2,10 @@ importScripts('/_nuxt/workbox.4c4f5ca6.js')
 
 workbox.precaching.precacheAndRoute([
   {
+    "url": "/_nuxt/07b54232d8a04bb9308e.js",
+    "revision": "0bf0cde172245d73669b988448d975c3"
+  },
+  {
     "url": "/_nuxt/0d415371a22c28c95031.js",
     "revision": "4435c19f921beb4af5e790b6913418fa"
   },
@@ -18,6 +22,14 @@ workbox.precaching.precacheAndRoute([
     "revision": "d972e85b59ff09601543509fda36f001"
   },
   {
+    "url": "/_nuxt/357754a86b02df77879b.js",
+    "revision": "656b345a7ef1c6c3f77191f11e7c1ed8"
+  },
+  {
+    "url": "/_nuxt/434779e185fafc70ae65.js",
+    "revision": "1c1f9730b12b62cc684997974a381609"
+  },
+  {
     "url": "/_nuxt/517c99fb74c355c6ea2e.js",
     "revision": "baf58d794040495dcd31ba90c4a587cc"
   },
@@ -26,8 +38,8 @@ workbox.precaching.precacheAndRoute([
     "revision": "b9ad0b09ada3c77667a16221dcb151cd"
   },
   {
-    "url": "/_nuxt/7c62d7cdfd072bd5fc32.js",
-    "revision": "1d49e23920842b8eea5552dd0ec24653"
+    "url": "/_nuxt/6a309a32760c89e382a7.js",
+    "revision": "6b6a9665cfbd1e1f5b738d340f8be2f8"
   },
   {
     "url": "/_nuxt/7ccd0b3f1e4750003e96.js",
@@ -38,16 +50,8 @@ workbox.precaching.precacheAndRoute([
     "revision": "d1bb89bc84ca0f462cbfb5a05ce36e11"
   },
   {
-    "url": "/_nuxt/9daa63bf89fa65d8e27f.js",
-    "revision": "4410a3c98faa3116b1552b7169ac696c"
-  },
-  {
-    "url": "/_nuxt/a3ccc2b9ec8594a38b96.js",
-    "revision": "84bc6a1b519dbcaeedb48acb87b7c485"
-  },
-  {
-    "url": "/_nuxt/ae69d4588046a69a8c0b.js",
-    "revision": "6223202019eb64366638a518217b8971"
+    "url": "/_nuxt/96917279644e312e14bc.js",
+    "revision": "1a076f4e86a5b159d76479f956b67209"
   },
   {
     "url": "/_nuxt/c0015d533e26e38f2c96.css",
@@ -64,10 +68,6 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "/_nuxt/e8c48f5669642ee3d2e5.js",
     "revision": "b237c0c0b54e5792d8072f6caacea7fe"
-  },
-  {
-    "url": "/_nuxt/f2d567412893d409e3b6.js",
-    "revision": "1c1f9730b12b62cc684997974a381609"
   },
   {
     "url": "/_nuxt/fdff123442be5c7e8dea.js",
