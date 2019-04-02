@@ -9,24 +9,41 @@
       <div class="_section-content">
         <div class="_section-article" v-html="$md.render(intro || '')" />
       </div>
-      <div class="_grid-3-2 _grid-gap-large-sm">
+      <div class="_grid-3-1 _grid-gap-large-sm">
         <div class="Latest">
           <div class="Latest-cafes _margin-bottom-2">
-            <h4>Latest Cafes</h4>
+            <h2 class="_font-coffee _color-green">Latest Cafes</h2>
             <div class="Latest-cafes-container _margin-bottom-2 _masonry-2-sm">
               <div v-for="item of latestCafes" :key="item.id" >
-                <div class="_card _padding">
-                  <h5>{{ item.fields['Name'] }}</h5>
-                  <div v-html="$md.render(item.fields['Description'] || '')" /> 
+                <div class="Coffee-preview _card _block">
+                  <router-link :to="`/cafe/${item.fields['Slug']}`">
+                    <img :src="item.fields['Cover'][0].thumbnails.large.url" >
+                  </router-link>
+                  <div class="_padding" >
+                    <router-link :to="`/cafe/${item.fields['Slug']}`">
+                      <h5>{{ item.fields['Name'] }}</h5>
+                    </router-link>
+                    <div v-html="$md.render(item.fields['Description'] || '')" /> 
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="Latest-stories">
-            <h4>Latest Stories</h4>
+            <h2 class="_font-coffee _color-yellow">Latest Stories</h2>
             <div class="Latest-stories-container _margin-bottom-2">
               <div v-for="item of latestStories" :key="item.id">
-                <div class="_card _padding">{{ item.fields['Name'] }}</div>
+                <div class="Coffee-preview _card _block">
+                  <router-link :to="`/cafe/${item.fields['Slug']}`">
+                    <img :src="item.fields['Cover'][0].thumbnails.large.url" >
+                  </router-link>
+                  <div class="_padding" >
+                    <router-link :to="`/stories/${item.fields['Slug']}`">
+                      <h5>{{ item.fields['Name'] }}</h5>
+                    </router-link>
+                    <div v-html="$md.render(item.fields['Lede'] || '')" /> 
+                  </div>
+                </div>
               </div>
             </div>
           </div>

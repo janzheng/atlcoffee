@@ -8,7 +8,7 @@
 
     <div class="_section-page _margin-center _padding-left-2 _padding-right-2 _margin-bottom-2">
 
-      <div class="Coffee-head _section-content">
+      <div class="Coffee-head ">
         <h1 class="Coffee-title">{{ cafe.fields['Name'] }}</h1>
       </div>
 
@@ -23,7 +23,8 @@
         </div> -->
         <div class="Coffee-main">
           <div class="Coffee-description" v-html="$md.render(cafe.fields['Description'] || '')" />
-          <div class="Coffee-stories">
+
+          <div v-if="stories && stories.length > 0" class="Coffee-stories">
             <div v-for="item of stories" :key="item.id" class="Coffee-story _card _padding">
               <h6 class="_padding-none-i">Story</h6>
               <router-link :to="`/stories/${item.fields['Slug']}`"><h5>{{ item.fields['Name'] }}</h5></router-link>
@@ -31,8 +32,28 @@
             </div>
           </div>
 
+          <div v-if="comments && comments.length > 0" class="Coffee-comments" >
+            <!-- <h6 class="_padding-none-i">Comments</h6> -->
+            <div v-for="item of comments" :key="item.id" class="Coffee-comment _card _padding">
+              <div>
+                <p class="_font-bold">{{ item.fields['AuthorName'][0] }}</p>
+                <div v-if="item.fields['❤']" class="Coffee-comment-favorite"><span >❤️</span></div>
+                <div v-if="item.fields['OverallRating']" class="Coffee-comment-overall" />
+                <div v-if="item.fields['ValueRating']" class="Coffee-comment-value" />
+                <div v-if="item.fields['ServiceRating']" class="Coffee-comment-service" />
+                <div v-if="item.fields['CoffeeRating']" class="Coffee-comment-coffee" />
+                <div v-if="item.fields['WorkRating']" class="Coffee-comment-work" />
+                <div v-if="item.fields['PowerRating']" class="Coffee-comment-power" />
+                <span v-html="$md.render(item.fields['Content'] || '')" />
+              </div>
+            </div>
+          </div>
+
           <vue-picture-swipe :items="galleryItems" :options="{shareEl: false, captionEl: true,}" class="Coffee-gallery " />
         </div>
+
+
+
         <div class="Coffee-sidebar">
           <div class="Coffee-sidebar-container">
             <h6>Info</h6>
@@ -63,20 +84,22 @@
             </div>
           </div>
 
+          <div v-if="cafe.fields['RoastPartner']" class="Coffee-sidebar-container" >
+            <h6>Roasting Partner</h6>
+            <div v-for="item of roastPartner" :key="item.id" class="Coffee-sidebar-item" >
+              <!-- <div class="_font-bold" v-html="$md.render(item.fields['Name'] || '')"></div> -->
+              <div class="" v-html="$md.render(item.fields['Content'] || '')" />
+              <!-- <span v-for="item of cafe.fields['RoastSource']" class="_tag">{{ item }}</span> -->
+              <!-- <span v-html="$md.render(roastPartner || '')" /> -->
+            </div>
+          </div>
+
           <div class="Coffee-sidebar-container">
             <h6>Amenities</h6>
             <div v-if="cafe.fields['Amenities']" class="Coffee-sidebar-item" >
               <div v-for="item of cafe.fields['Amenities']" :key="item.id" class="">
                 <div><span class="_tag">{{ item }}</span></div>
               </div>
-            </div>
-          </div>
-
-          <div v-if="cafe.fields['RoastPartner']" class="Coffee-sidebar-container" >
-            <h6>Roasting Partner</h6>
-            <div class="Coffee-sidebar-item" >
-              <!-- <span v-for="item of cafe.fields['RoastSource']" class="_tag">{{ item }}</span> -->
-              <span v-html="$md.render(roastPartner || '')" />
             </div>
           </div>
 
@@ -131,6 +154,7 @@ export default {
     ...mapState([
       'Cafes',
       'Stories',
+      'Comments',
       'Roasters',
       ]),
     // cafe() {
@@ -142,8 +166,13 @@ export default {
       // sometimes there can be more, if it's a small chain
       return this.$cytosis.getLinkedRecords(this.cafe.fields['Stories'], this.Stories, true )
     },
+    comments() {
+      // these are the cafes linked to the establishment
+      // sometimes there can be more, if it's a small chain
+      return this.$cytosis.getLinkedRecords(this.cafe.fields['Comments'], this.Comments, true )
+    },
     roastPartner() {
-      return this.$cytosis.getLinkedRecords(this.cafe.fields['RoastPartner'], this.Roasters ).join(', ')
+      return this.$cytosis.getLinkedRecords(this.cafe.fields['RoastPartner'], this.Roasters, true )
     },
     galleryItems() {
       const gallery = this.cafe.fields['Gallery']

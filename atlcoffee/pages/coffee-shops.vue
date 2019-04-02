@@ -29,11 +29,11 @@
 
         <div v-for="item of Cafes" :key="item.id" class="Coffee-card --wide _card _grid-1-3-xs" >
           <div>
-            <img v-lazy="item.fields['Cover'][0]['thumbnails']['large']['url']" v-if="item.fields['Cover']" class="_width-full" >
+            <router-link :to="`/cafe/${item.fields['Slug']}`" ><img v-lazy="item.fields['Cover'][0]['thumbnails']['large']['url']" v-if="item.fields['Cover']" class="_width-full" >
+            </router-link>
           </div>
           <div class="_padding _padding-left-none">
-            <div v-if="item.fields['Recommended']" class="Coffee-card-recommended" >🌟</div>
-            <router-link :to="`/cafe/${item.fields['Slug']}`" class="Coffee-card-title">{{ item.fields['Name'] }}</router-link>
+            <router-link :to="`/cafe/${item.fields['Slug']}`" class="Coffee-card-title">{{ item.fields['Name'] }}</router-link> <span v-if="item.fields['Recommended']" class="Coffee-card-recommended" >❤️</span>
             <div class="Coffee-card-location">{{ item.fields['Neighborhood'] || item.fields['City'] }}</div>
             <div v-if="stories(item).length > 0" class="Coffee-card-story _padding-top-half" >
               <router-link v-for="subitem of stories(item)" :key="subitem.id" :to="`/stories/${subitem.fields['Slug']}`">Story: {{ subitem.fields['Name'] }}</router-link>
@@ -75,7 +75,7 @@ export default {
   },
 
   // runs on generation and page route (but not on first page load)
-  async asyncData({env, route}) {
+  async asyncData({env}) {
 
     return {
       postUrl: env.ext_handler,
@@ -203,7 +203,7 @@ export default {
         //     SEARCH(LOWER("${searchTerm}"), LOWER(City)),
         //     SEARCH(LOWER("${searchTerm}"), LOWER(Name))
         //   ),
-        // `
+        addFilter(`SEARCH(LOWER("${searchTerm}"), LOWER({Neighborhood}))`, 'OR')
         addFilter(`SEARCH(LOWER("${searchTerm}"), LOWER({City}))`, 'OR')
         addFilter(`SEARCH(LOWER("${searchTerm}"), LOWER({Name}))`, 'OR')
       }

@@ -4,6 +4,12 @@
   border: 1px solid usetheme(card); // $color-silver-lighter;
   color: usetheme(copy);
   overflow: auto;
+  @extend %ease;
+
+  &:hover {
+    border-color: usetheme(active);
+    @extend %ease;
+  }
 
   &.--img {
     img {
@@ -28,37 +34,6 @@
     background-color: usetheme(advert); // $color-teal-50;
     border-color: usetheme(advert); // $color-teal-50;
   }
-
-
-
-  // &.--teal-50 {
-  //   background-color: $color-teal-50;
-  //   border-color: $color-teal-50;
-  // }
-  // &.--teal-10 {
-  //   background-color: $color-teal-10;
-  //   border-color: $color-teal-10;
-  // }
-
-  // &.--tertiary {
-  //   background-color: usetheme(tertiary); // $color-teal-50;
-  //   border-color: usetheme(tertiary); // $color-teal-50;
-  //   color: usetheme(bg);
-  //   // background-color: $color-tertiary;
-  //   // border-color: $color-tertiary;
-  // }
-  //   &.--tertiary-80 {
-  //     background-color: $color-tertiary-80;
-  //     border-color: $color-tertiary-80;
-  //   }
-  //   &.--tertiary-50 {
-  //     background-color: $color-tertiary-50;
-  //     border-color: $color-tertiary-50;
-  //   }
-  //   &.--tertiary-10 {
-  //     background-color: $color-tertiary-10;
-  //     border-color: $color-tertiary-10;
-  //   }
 
   &.--shadow {
     box-shadow: 0px 4px 8px rgba(70, 70, 70, 0.1);

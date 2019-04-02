@@ -95,6 +95,17 @@
 	}
 }
 
+// used in homepage / latest
+.Coffee-preview {
+	img {
+		object-fit: cover;
+    width: 100%;
+    vertical-align: middle;
+    border-radius: 0;
+	}
+
+}
+
 .Coffee-card {
 	width: fit-content;
 	max-width: 500px;
@@ -116,6 +127,18 @@
 	}
 }
 
+
+/* 
+
+	Cofee Page
+
+ */
+
+// 
+.Coffee-head {
+	margin-top: $size;
+	// margin-bottom: $size;
+}
 
 .Author {
 	padding-bottom: $size;

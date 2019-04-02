@@ -78,8 +78,6 @@ export default async function ({route, env, store}) {
     keyword = route.params.slug // used to match keyword by field
   })[0]
 
-
-
   // only do it on server-side
   // static is loaded on client on every page load/refresh, dynamic is only on generation
   

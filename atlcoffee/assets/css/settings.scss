@@ -135,6 +135,7 @@ $colors: (
 ._color-blue { color: usetheme(_blue, $colors); }
 ._color-green { color: usetheme(_green, $colors); }
 ._color-gray { color: usetheme(_gray, $colors); }
+._color-red { color: usetheme(_red, $colors); }
 
 @include addtheme($colors)
 $colorMap: colorTintMap($colors);

@@ -6,7 +6,7 @@ export async function loadQuery(env, store, routeName, query, keyword) {
   // todo: need some other way to keep track of what we've grabbed
   // esp. important for site generation
   // if(store.state && !store.state.Content) {
-  console.log('load cytosis by query:', query, ' route:', routeName)
+  console.log('load cytosis by query:', query, 'keyword:', keyword, 'route:', routeName)
   data = await store.cache.dispatch('loadCytosis', {
     env,
     tableQuery: query,
