@@ -224,6 +224,9 @@ export default {
       //   ${andFilterStr}
       // )`
 
+      // only return published items
+      addFilter(`IF({isPublished},TRUE(),FALSE())`, 'AND')
+
       console.log('filter text: ', getFilter() )
 
       // if search queries are empty, we return the full list

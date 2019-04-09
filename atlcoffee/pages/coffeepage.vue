@@ -88,7 +88,7 @@
             <h6>Roasting Partner</h6>
             <div v-for="item of roastPartner" :key="item.id" class="Coffee-sidebar-item" >
               <!-- <div class="_font-bold" v-html="$md.render(item.fields['Name'] || '')"></div> -->
-              <div class="" v-html="$md.render(item.fields['Content'] || '')" />
+              <div class="" v-html="$md.render(item.fields['Short'] || '')" />
               <!-- <span v-for="item of cafe.fields['RoastSource']" class="_tag">{{ item }}</span> -->
               <!-- <span v-html="$md.render(roastPartner || '')" /> -->
             </div>

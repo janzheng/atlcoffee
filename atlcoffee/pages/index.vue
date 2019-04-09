@@ -1,9 +1,10 @@
 <template>
   <div :style="{top: navHeight * -1 + 'px'}" class="_splash-container">
 
-    <div v-if="header" ref="splash" :style="{minHeight: 450+'px', height: 50+'vh'}" class=" _vh-50">
-      <div :style="{backgroundImage: 'url('+header.url+')', height: '100%'}" class="Coffee-splash _splash-image" />
+    <div v-if="cover" ref="splash" :style="{minHeight: 450+'px', height: 50+'vh'}" class=" _vh-50">
+      <div :style="{backgroundImage: 'url('+cover.url+')', height: '100%'}" class="Coffee-splash _splash-image" />
     </div>
+
 
     <div class="Home _section-page _margin-center">
       <div class="_section-content">
@@ -15,7 +16,7 @@
             <h2 class="_font-coffee _color-green">Latest Cafes</h2>
             <div class="Latest-cafes-container _margin-bottom-2 _masonry-2-sm">
               <div v-for="item of latestCafes" :key="item.id" >
-                <div class="Coffee-preview _card _block">
+                <div class="Coffee-preview _card --hover _block">
                   <router-link :to="`/cafe/${item.fields['Slug']}`">
                     <img :src="item.fields['Cover'][0].thumbnails.large.url" >
                   </router-link>
@@ -33,7 +34,7 @@
             <h2 class="_font-coffee _color-yellow">Latest Stories</h2>
             <div class="Latest-stories-container _margin-bottom-2">
               <div v-for="item of latestStories" :key="item.id">
-                <div class="Coffee-preview _card _block">
+                <div class="Coffee-preview _card --hover _block">
                   <router-link :to="`/cafe/${item.fields['Slug']}`">
                     <img :src="item.fields['Cover'][0].thumbnails.large.url" >
                   </router-link>
@@ -93,7 +94,7 @@ export default {
   data () {
     return {
       intro: this.$cytosis.find('Content.home-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
-      header: this.$cytosis.find('Content.home-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Header'][0],
+      cover: this.$cytosis.find('Content.home-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Cover'][0],
       map: this.$cytosis.find('Content.coffee-map', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
@@ -125,6 +126,7 @@ export default {
     this.$store.dispatch("updateCreate", {splashHeight: this.$refs.splash.clientHeight})
   },
   beforeDestroy() {
+    // special header behavior
     this.$store.dispatch("updateCreate", {diffTopHeader: false, splashHeight: 0})
   },
 
